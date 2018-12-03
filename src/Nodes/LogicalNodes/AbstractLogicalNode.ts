@@ -1,10 +1,10 @@
 import AbstractNode from "../AbstractNode";
 
-export default class AbstractLogicalNode extends AbstractNode {
-    readonly queries;
+export default abstract class AbstractLogicalNode extends AbstractNode {
+    readonly subNodes;
 
-    constructor(name: string, queries: AbstractNode[]) {
-        super(name);
-        this.queries = queries;
+    constructor(subNodes: AbstractNode[]) {
+        super();
+        this.subNodes = subNodes;
     }
 }

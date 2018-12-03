@@ -1,0 +1,27 @@
+{
+  "name": "rollun-ts-rql",
+  "version": "0.1.0",
+  "description": "Tools to Work with RQL using TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryakwork/rollun-ts-rql.git"
+  },
+  "keywords": [
+    "rql",
+    "typescript",
+    "rollun"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bryakwork/rollun-ts-rql/issues"
+  },
+  "homepage": "https://github.com/bryakwork/rollun-ts-rql#readme",
+  "dependencies": {
+    "typescript": "^3.2.1"
+  }
+}

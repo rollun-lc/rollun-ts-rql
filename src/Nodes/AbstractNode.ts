@@ -1,7 +1,3 @@
-export default class AbstractNode {
+export default abstract class AbstractNode {
     readonly name;
-
-    constructor(name:string) {
-        this.name = name;
-    }
 }

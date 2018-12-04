@@ -1,6 +1,6 @@
 import AbstractNode from "./AbstractNode";
 
-export default class LimitNode extends AbstractNode {
+export default class Limit extends AbstractNode {
     readonly name = 'limit';
     readonly limit: number;
     readonly offset: number;

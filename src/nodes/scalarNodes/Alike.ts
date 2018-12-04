@@ -1,5 +1,5 @@
 import AbstractScalarNode from "./AbstractScalarNode";
 
-export default class AlikeNode extends AbstractScalarNode {
+export default class Alike extends AbstractScalarNode {
     readonly name = 'alike';
 }

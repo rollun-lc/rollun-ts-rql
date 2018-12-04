@@ -1,6 +1,6 @@
 import AbstractNode from "./AbstractNode";
 
-export default class SelectNode extends AbstractNode {
+export default class Select extends AbstractNode {
     readonly name = 'select';
     readonly fields: string[];
 

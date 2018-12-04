@@ -1,5 +1,5 @@
 import AbstractScalarNode from "./AbstractScalarNode";
 
-export default class EqNode extends AbstractScalarNode {
+export default class Eq extends AbstractScalarNode {
     readonly name = 'eq';
 }

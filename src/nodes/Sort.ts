@@ -7,7 +7,7 @@ export interface SortOptions {
     [fieldName: string]: (1 | -1)
 }
 
-export default class SortNode extends AbstractNode {
+export default class Sort extends AbstractNode {
     readonly name = 'sort';
     readonly sortOptions;
 

@@ -4,7 +4,7 @@
   "description": "Tools to Work with RQL using TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "intern"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/bryakwork/rollun-ts-rql#readme",
   "dependencies": {
+    "intern": "^4.3.3",
+    "ts-node": "^7.0.1",
     "typescript": "^3.2.1"
   }
 }

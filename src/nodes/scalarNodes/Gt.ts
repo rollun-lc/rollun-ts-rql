@@ -1,5 +1,5 @@
 import AbstractScalarNode from "./AbstractScalarNode";
 
-export default class GtNode extends AbstractScalarNode {
+export default class Gt extends AbstractScalarNode {
     readonly name = 'gt';
 }

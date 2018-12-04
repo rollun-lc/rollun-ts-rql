@@ -1,5 +1,5 @@
 import AbstractArrayNode from "./AbstractArrayNode";
 
-export default class InNode extends AbstractArrayNode {
+export default class In extends AbstractArrayNode {
     readonly name = 'in';
 }

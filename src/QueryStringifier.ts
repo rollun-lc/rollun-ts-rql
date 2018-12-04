@@ -1,11 +1,11 @@
 import Query from "./Query";
-import SelectNode from "./Nodes/SelectNode";
-import LimitNode from "./Nodes/LimitNode";
-import SortNode from "./Nodes/SortNode";
-import AbstractNode from "./Nodes/AbstractNode";
-import AbstractLogicalNode from "./Nodes/LogicalNodes/AbstractLogicalNode";
-import AbstractArrayNode from "./Nodes/ArrayNodes/AbstractArrayNode";
-import AbstractScalarNode from "./Nodes/ScalarNodes/AbstractScalarNode";
+import Select from "./nodes/Select";
+import Limit from "./nodes/Limit";
+import Sort from "./nodes/Sort";
+import AbstractNode from "./nodes/AbstractNode";
+import AbstractLogicalNode from "./nodes/logicalNodes/AbstractLogicalNode";
+import AbstractArrayNode from "./nodes/arrayNodes/AbstractArrayNode";
+import AbstractScalarNode from "./nodes/scalarNodes/AbstractScalarNode";
 
 export default class QueryStringifier {
     static stringify(query: Query): string {
@@ -27,11 +27,11 @@ export default class QueryStringifier {
         return this[methodName](node);
     }
 
-    protected static parseSelectNode(node?: SelectNode): string {
+    protected static parseSelectNode(node?: Select): string {
         return node ? `select(${node.fields.join(',')})` : '';
     }
 
-    protected static parseSortNode(node?: SortNode): string {
+    protected static parseSortNode(node?: Sort): string {
         let result;
         if (node) {
             result = Object.entries(node.sortOptions).reduce((accumulator, currentItem) => {
@@ -48,7 +48,7 @@ export default class QueryStringifier {
         return result;
     }
 
-    protected static parseLimitNode(node?: LimitNode): string {
+    protected static parseLimitNode(node?: Limit): string {
         return node ? `limit(${node.limit},${node.offset})` : '';
     }
 
@@ -73,7 +73,7 @@ export default class QueryStringifier {
 
             case (node instanceof AbstractArrayNode):
                 const arrayNode = <AbstractArrayNode>node;
-                result = `${arrayNode.name}(${arrayNode.values.join(',')})`;
+                result = `${arrayNode.name}(${arrayNode.field},(${arrayNode.values.join(',')}))`;
                 break;
         }
         return result;

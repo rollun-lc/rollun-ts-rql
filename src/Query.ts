@@ -1,24 +1,24 @@
 import Select from "./nodes/Select";
 import Sort from "./nodes/Sort";
 import Limit from "./nodes/Limit";
-import AbstractNode from "./nodes/AbstractNode";
+import AbstractQueryNode from "./nodes/AbstractQueryNode";
 
 export default class Query {
     readonly selectNode;
     readonly sortNode;
     readonly limitNode;
-    readonly conditionNode;
+    readonly queryNode;
 
     constructor(
         props: {
             select?: Select,
             sort?: Sort,
             limit?: Limit,
-            condition?: AbstractNode,
+            query?: AbstractQueryNode,
         }) {
         this.selectNode = props.select;
         this.sortNode = props.sort;
         this.limitNode = props.limit;
-        this.conditionNode = props.condition;
+        this.queryNode = props.query;
     }
 }

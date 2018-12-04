@@ -29,7 +29,7 @@ const dataProvider = [
             ]),
             sort: new Sort({age: -1}),
             limit: new Limit(10, 0),
-            condition: new And([
+            query: new And([
                 new Or([
                     new Eq('name', 'Bob'),
                     new Eq('name', 'Jeff'),]),
@@ -45,7 +45,7 @@ const dataProvider = [
     {
         queryObject: new Query({
             select: new Select(['id', 'name', 'age']),
-            condition: new And([
+            query: new And([
                     new And([
                         new In('name', ['Alfred', 'Ivan', 'Jared']),
                         new Out('id', [12335, 16725]),
@@ -62,7 +62,7 @@ const dataProvider = [
     },
     {
         queryObject: new Query({
-            condition: new Not([
+            query: new Not([
                 new Or([
                     new Gt('age',33),
                     new Lt('age',100),

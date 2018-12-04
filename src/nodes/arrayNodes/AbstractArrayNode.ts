@@ -1,6 +1,6 @@
-import AbstractNode from "../AbstractNode";
+import AbstractQueryNode from "../AbstractQueryNode";
 
-export default abstract class AbstractArrayNode extends AbstractNode {
+export default abstract class AbstractArrayNode extends AbstractQueryNode {
     readonly field: string;
     readonly values: any[];
 

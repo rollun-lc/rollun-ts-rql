@@ -1,6 +1,6 @@
-import AbstractNode from "../AbstractNode";
+import AbstractQueryNode from "../AbstractQueryNode";
 
-export default abstract class AbstractScalarNode  extends AbstractNode {
+export default abstract class AbstractScalarNode  extends AbstractQueryNode {
     readonly field;
     readonly value;
 

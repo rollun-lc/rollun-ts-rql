@@ -52,7 +52,7 @@ export default class QueryStringifier {
         return node ? `limit(${node.limit},${node.offset})` : '';
     }
 
-    protected static parseConditionNode(node?: AbstractNode): string {
+    protected static parseQueryNode(node?: AbstractNode): string {
         let result = '';
         switch (true) {
 
@@ -60,7 +60,7 @@ export default class QueryStringifier {
                 const logicalNode = <AbstractLogicalNode>node;
                 const nodeName = logicalNode.name;
                 result += logicalNode.subNodes.reduce((accumulator, currentItem) => {
-                    return accumulator + `${this.parseConditionNode(currentItem)},`;
+                    return accumulator + `${this.parseQueryNode(currentItem)},`;
                 }, result);
                 result = (result.substr(-1) === ',') ? result.substring(0, result.length - 1) : result;
                 result = `${nodeName}(${result})`;

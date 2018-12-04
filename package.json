@@ -1,7 +1,7 @@
 {
   "name": "rollun-ts-rql",
   "version": "0.1.0",
-  "description": "Tools to Work with RQL using TypeScript",
+  "description": "Work with RQL using TypeScript",
   "main": "index.js",
   "scripts": {
     "test": "intern"
@@ -21,9 +21,11 @@
     "url": "https://github.com/bryakwork/rollun-ts-rql/issues"
   },
   "homepage": "https://github.com/bryakwork/rollun-ts-rql#readme",
-  "dependencies": {
+  "devDependencies": {
     "intern": "^4.3.3",
-    "ts-node": "^7.0.1",
+    "ts-node": "^7.0.1"
+  },
+  "dependencies": {
     "typescript": "^3.2.1"
   }
 }

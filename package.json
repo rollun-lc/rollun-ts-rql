@@ -1,6 +1,6 @@
 {
   "name": "rollun-ts-rql",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "RQL query object and serializer written in TypeScript",
   "scripts": {
     "test": "intern",

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "RQL query object and serializer written in TypeScript",
   "scripts": {
-    "test": "intern"
+    "test": "intern",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,6 @@
     "ts-node": "^7.0.1"
   },
   "dependencies": {
-    "typescript": "^3.2.1"
+    "typescript": "^2.6.2"
   }
 }

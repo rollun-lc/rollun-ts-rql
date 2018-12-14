@@ -46,14 +46,14 @@ const dataProvider = [
         queryObject: new Query({
             select: new Select(['id', 'name', 'age']),
             query: new And([
-                    new And([
-                        new In('name', ['Alfred', 'Ivan', 'Jared']),
-                        new Out('id', [12335, 16725]),
-                    ]),
-                    new Or([
-                        new Like('name', 'er'),
-                        new Alike('name', 'aZa'),
-                    ]),
+                new And([
+                    new In('name', ['Alfred', 'Ivan', 'Jared']),
+                    new Out('id', [12335, 16725]),
+                ]),
+                new Or([
+                    new Like('name', 'er'),
+                    new Alike('name', 'aZa'),
+                ]),
             ]),
             limit: new Limit(13, 100),
         }),
@@ -64,9 +64,9 @@ const dataProvider = [
         queryObject: new Query({
             query: new Not([
                 new Or([
-                    new Gt('age',33),
-                    new Lt('age',100),
-                    new Ne('id',1823457234985)
+                    new Gt('age', 33),
+                    new Lt('age', 100),
+                    new Ne('id', 1823457234985)
                 ])
             ])
         }),
@@ -79,6 +79,25 @@ const dataProvider = [
         }),
         expectedString: 'limit(20,20)',
         message: 'fourth query'
+    },
+    {
+        queryObject: new Query({
+            select: new Select(['id', 'name', 'age']),
+            query: new Eq('age', 45)
+        }),
+        expectedString: 'select(id,name,age)&eq(age,45)',
+        message: 'query 5'
+    },
+    {
+        queryObject: new Query({
+            select: new Select(['id', 'name', 'age']),
+            query: new And([
+                new Or([new Le('age', 45), new Ge('age', 45)]),
+                new Or([new Le('age', 45), new Ge('age', 45)])
+            ])
+        }),
+        expectedString: 'select(id,name,age)&and(or(le(age,45),ge(age,45)),or(le(age,45),ge(age,45)))',
+        message: 'query 6'
     },
 ];
 

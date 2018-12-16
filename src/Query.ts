@@ -4,10 +4,10 @@ import Limit from "./nodes/Limit";
 import AbstractQueryNode from "./nodes/AbstractQueryNode";
 
 export default class Query {
-    readonly selectNode;
-    readonly sortNode;
-    readonly limitNode;
-    readonly queryNode;
+    public selectNode;
+    public sortNode;
+    public limitNode;
+    public queryNode;
 
     constructor(
         props: {

@@ -2,7 +2,7 @@ import AbstractNode from "./AbstractNode";
 
 export default class Select extends AbstractNode {
     readonly name = 'select';
-    readonly fields: string[];
+    public fields: string[];
 
     constructor(fields: string[]) {
         super();

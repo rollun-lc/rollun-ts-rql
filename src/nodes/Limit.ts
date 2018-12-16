@@ -2,8 +2,8 @@ import AbstractNode from "./AbstractNode";
 
 export default class Limit extends AbstractNode {
     readonly name = 'limit';
-    readonly limit: number;
-    readonly offset: number;
+    public limit: number;
+    public offset: number;
 
     constructor(limit: number, offset: number = 0) {
         super();

@@ -9,7 +9,7 @@ export interface SortOptions {
 
 export default class Sort extends AbstractNode {
     readonly name = 'sort';
-    readonly sortOptions;
+    public sortOptions;
 
     constructor(sortOptions: SortOptions) {
         super();

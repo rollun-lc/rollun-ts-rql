@@ -4,7 +4,8 @@
   "description": "RQL query object and serializer written in TypeScript",
   "scripts": {
     "test": "intern",
-    "build": "tsc"
+    "build": "tsc",
+    "publish patch": "npm version patch && npm publish"
   },
   "repository": {
     "type": "git",

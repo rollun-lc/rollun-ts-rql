@@ -37,9 +37,12 @@ export default class QueryStringifier {
             result = Object.entries(node.sortOptions).reduce((accumulator, currentItem) => {
                 const [field, direction] = currentItem;
                 const parsedDirection = (direction === 1) ? '+' : '-';
-                accumulator += `${parsedDirection}${field}`;
+                accumulator += `${parsedDirection}${field},`;
                 return accumulator;
             }, 'sort(');
+            if (result.endsWith(',')) {
+                result = result.substring(0,result.length - 1);
+            }
             result += ')';
         }
         else {

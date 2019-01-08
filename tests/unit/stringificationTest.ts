@@ -99,6 +99,14 @@ const dataProvider = [
         expectedString: 'select(id,name,age)&and(or(le(age,45),ge(age,45)),or(le(age,45),ge(age,45)))',
         message: 'query 6'
     },
+    {
+        queryObject: new Query({
+            select: new Select(['id', 'name', 'age']),
+            sort: new Sort({id: 1, age: 1})
+        }),
+        expectedString: 'select(id,name,age)&sort(+id,+age)',
+        message: 'query with multiple sort nodes'
+    },
 ];
 
 suite('Stringification', () => {

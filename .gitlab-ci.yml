@@ -1,0 +1,24 @@
+image: node:latest
+stages:
+- analyse
+- build
+- test
+- deploy
+
+before_script:
+  - npm i
+
+run_tslint:
+  stage: analyse
+  script:
+  - npm run analyse
+
+run_tsc:
+  stage: build
+  script:
+  - npm bun build
+
+run_tests:
+  stage: test
+  script:
+  - npm test

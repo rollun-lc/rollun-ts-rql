@@ -3,8 +3,9 @@
   "version": "0.2.4",
   "description": "RQL query object and serializer written in TypeScript",
   "scripts": {
-    "test": "intern",
+    "analyse": "./node_modules/.bin/tslint --project ./tslint.json",
     "build": "tsc",
+    "test": "intern",
     "publish patch": "npm version patch && npm publish"
   },
   "repository": {
@@ -24,7 +25,8 @@
   "homepage": "https://github.com/bryakwork/rollun-ts-rql#readme",
   "devDependencies": {
     "intern": "^4.3.3",
-    "ts-node": "^7.0.1"
+    "ts-node": "^7.0.1",
+    "tslint": "^5.12.0"
   },
   "dependencies": {
     "typescript": "^2.6.2"

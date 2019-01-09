@@ -22,3 +22,11 @@ run_tests:
   stage: test
   script:
   - npm test
+
+publish:
+  only:
+  - tags
+  stage: deploy
+  script:
+    - npm version from-git
+    - npm publish

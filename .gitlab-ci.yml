@@ -16,7 +16,7 @@ run_tslint:
 run_tsc:
   stage: build
   script:
-  - npm bun build
+  - npm run build
 
 run_tests:
   stage: test

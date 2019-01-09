@@ -22,99 +22,99 @@ const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
 
 const dataProvider = [
-    {
-        queryObject: new Query({
-            select: new Select([
-                'id', 'name', 'data', 'age'
-            ]),
-            sort: new Sort({age: -1}),
-            limit: new Limit(10, 0),
-            query: new And([
-                new Or([
-                    new Eq('name', 'Bob'),
-                    new Eq('name', 'Jeff'),]),
-                new And([
-                    new Le('age', 23),
-                    new Ge('age', 55),
-                ]),
-            ])
-        }),
-        expectedString: 'select(id,name,data,age)&sort(-age)&limit(10,0)&and(or(eq(name,Bob),eq(name,Jeff)),and(le(age,23),ge(age,55)))',
-        message: 'first query'
-    },
-    {
-        queryObject: new Query({
-            select: new Select(['id', 'name', 'age']),
-            query: new And([
-                new And([
-                    new In('name', ['Alfred', 'Ivan', 'Jared']),
-                    new Out('id', [12335, 16725]),
-                ]),
-                new Or([
-                    new Like('name', 'er'),
-                    new Alike('name', 'aZa'),
-                ]),
-            ]),
-            limit: new Limit(13, 100),
-        }),
-        expectedString: 'select(id,name,age)&limit(13,100)&and(and(in(name,(Alfred,Ivan,Jared)),out(id,(12335,16725))),or(like(name,er),alike(name,aZa)))',
-        message: 'second query'
-    },
-    {
-        queryObject: new Query({
-            query: new Not([
-                new Or([
-                    new Gt('age', 33),
-                    new Lt('age', 100),
-                    new Ne('id', 1823457234985)
-                ])
-            ])
-        }),
-        expectedString: 'not(or(gt(age,33),lt(age,100),ne(id,1823457234985)))',
-        message: 'third query'
-    },
-    {
-        queryObject: new Query({
-            limit: new Limit(20, 20)
-        }),
-        expectedString: 'limit(20,20)',
-        message: 'fourth query'
-    },
-    {
-        queryObject: new Query({
-            select: new Select(['id', 'name', 'age']),
-            query: new Eq('age', 45)
-        }),
-        expectedString: 'select(id,name,age)&eq(age,45)',
-        message: 'query 5'
-    },
-    {
-        queryObject: new Query({
-            select: new Select(['id', 'name', 'age']),
-            query: new And([
-                new Or([new Le('age', 45), new Ge('age', 45)]),
-                new Or([new Le('age', 45), new Ge('age', 45)])
-            ])
-        }),
-        expectedString: 'select(id,name,age)&and(or(le(age,45),ge(age,45)),or(le(age,45),ge(age,45)))',
-        message: 'query 6'
-    },
-    {
-        queryObject: new Query({
-            select: new Select(['id', 'name', 'age']),
-            sort: new Sort({id: 1, age: 1})
-        }),
-        expectedString: 'select(id,name,age)&sort(+id,+age)',
-        message: 'query with multiple sort nodes'
-    },
+	{
+		queryObject: new Query({
+			select: new Select([
+				'id', 'name', 'data', 'age'
+			]),
+			sort: new Sort({age: -1}),
+			limit: new Limit(10, 0),
+			query: new And([
+				new Or([
+					new Eq('name', 'Bob'),
+					new Eq('name', 'Jeff')]),
+				new And([
+					new Le('age', 23),
+					new Ge('age', 55)
+				])
+			])
+		}),
+		expectedString: 'select(id,name,data,age)&sort(-age)&limit(10,0)&and(or(eq(name,Bob),eq(name,Jeff)),and(le(age,23),ge(age,55)))',
+		message: 'first query'
+	},
+	{
+		queryObject: new Query({
+			select: new Select(['id', 'name', 'age']),
+			query: new And([
+				new And([
+					new In('name', ['Alfred', 'Ivan', 'Jared']),
+					new Out('id', [12335, 16725])
+				]),
+				new Or([
+					new Like('name', 'er'),
+					new Alike('name', 'aZa')
+				])
+			]),
+			limit: new Limit(13, 100)
+		}),
+		expectedString: 'select(id,name,age)&limit(13,100)&and(and(in(name,(Alfred,Ivan,Jared)),out(id,(12335,16725))),or(like(name,er),alike(name,aZa)))',
+		message: 'second query'
+	},
+	{
+		queryObject: new Query({
+			query: new Not([
+				new Or([
+					new Gt('age', 33),
+					new Lt('age', 100),
+					new Ne('id', 1823457234985)
+				])
+			])
+		}),
+		expectedString: 'not(or(gt(age,33),lt(age,100),ne(id,1823457234985)))',
+		message: 'third query'
+	},
+	{
+		queryObject: new Query({
+			limit: new Limit(20, 20)
+		}),
+		expectedString: 'limit(20,20)',
+		message: 'fourth query'
+	},
+	{
+		queryObject: new Query({
+			select: new Select(['id', 'name', 'age']),
+			query: new Eq('age', 45)
+		}),
+		expectedString: 'select(id,name,age)&eq(age,45)',
+		message: 'query 5'
+	},
+	{
+		queryObject: new Query({
+			select: new Select(['id', 'name', 'age']),
+			query: new And([
+				new Or([new Le('age', 45), new Ge('age', 45)]),
+				new Or([new Le('age', 45), new Ge('age', 45)])
+			])
+		}),
+		expectedString: 'select(id,name,age)&and(or(le(age,45),ge(age,45)),or(le(age,45),ge(age,45)))',
+		message: 'query 6'
+	},
+	{
+		queryObject: new Query({
+			select: new Select(['id', 'name', 'age']),
+			sort: new Sort({id: 1, age: 1})
+		}),
+		expectedString: 'select(id,name,age)&sort(+id,+age)',
+		message: 'query with multiple sort nodes'
+	}
 ];
 
 suite('Stringification', () => {
-    test('query to string', () => {
-        dataProvider.forEach((entry) => {
-            const {queryObject, expectedString, message} = entry;
-            const actualString = QueryStringifier.stringify(queryObject);
-            assert.equal(actualString, expectedString, message);
-        })
-    });
+	test('query to string', () => {
+		dataProvider.forEach((entry) => {
+			const {queryObject, expectedString, message} = entry;
+			const actualString = QueryStringifier.stringify(queryObject);
+			assert.equal(actualString, expectedString, message);
+		});
+	});
 });

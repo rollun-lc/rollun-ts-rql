@@ -1,3 +1,3 @@
 export default abstract class AbstractNode {
-    readonly name;
+	readonly name;
 }

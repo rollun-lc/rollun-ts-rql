@@ -6,7 +6,7 @@ stages:
 - deploy
 
 before_script:
-  - npm i
+- npm i
 
 run_tslint:
   stage: analyse

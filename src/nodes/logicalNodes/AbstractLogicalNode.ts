@@ -1,11 +1,11 @@
-import AbstractQueryNode from "../AbstractQueryNode";
-import AbstractNode from "../AbstractNode";
+import AbstractQueryNode from '../AbstractQueryNode';
+import AbstractNode from '../AbstractNode';
 
 export default abstract class AbstractLogicalNode extends AbstractQueryNode {
-    public subNodes;
+	public subNodes;
 
-    constructor(subNodes: AbstractNode[]) {
-        super();
-        this.subNodes = subNodes;
-    }
+	constructor(subNodes: AbstractNode[]) {
+		super();
+		this.subNodes = subNodes;
+	}
 }

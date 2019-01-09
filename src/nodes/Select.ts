@@ -1,11 +1,11 @@
-import AbstractNode from "./AbstractNode";
+import AbstractNode from './AbstractNode';
 
 export default class Select extends AbstractNode {
-    readonly name = 'select';
-    public fields: string[];
+	readonly name = 'select';
+	public fields: string[];
 
-    constructor(fields: string[]) {
-        super();
-        this.fields = fields;
-    }
+	constructor(fields: string[]) {
+		super();
+		this.fields = fields;
+	}
 }

@@ -1,5 +1,5 @@
-import AbstractLogicalNode from "./AbstractLogicalNode";
+import AbstractLogicalNode from './AbstractLogicalNode';
 
 export default class Or extends AbstractLogicalNode {
-    readonly name = 'or';
+	readonly name = 'or';
 }

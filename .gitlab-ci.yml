@@ -26,7 +26,6 @@ run_tests:
 publish:
   only:
   - tags
-  - manual
   stage: deploy
   script:
   - apt-get update
@@ -35,7 +34,7 @@ publish:
   - npm --no-git-tag-version version $(git describe --tags --abbrev=0)
   - |
       /usr/bin/expect <<EOD
-      spawn npm adduser
+      spawn npm add-user
       expect {
       "Username: " {send "$NPM_USER\r"; exp_continue}
       "Password: " {send "$NPM_PASS\r"; exp_continue}

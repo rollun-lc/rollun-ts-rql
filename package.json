@@ -3,10 +3,9 @@
   "version": "0.2.5",
   "description": "RQL query object and serializer written in TypeScript",
   "scripts": {
-    "analyse": "./node_modules/.bin/tslint --project ./tslint.json",
-    "build": "tsc",
-    "test": "intern",
-    "publish patch": "npm version patch && npm publish"
+    "analyse": "node_modules/.bin/tslint --project ./tslint.json",
+    "build": "node_modules/.bin/tsc",
+    "test": "node_modules/.bin/intern"
   },
   "repository": {
     "type": "git",

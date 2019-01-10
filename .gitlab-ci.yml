@@ -29,7 +29,7 @@ publish:
   stage: deploy
   script:
   - apt-get update
-  - apt-get install --no-install-recommends expect
+  - apt-get install -y --no-install-recommends expect
   - git fetch origin
   - npm --no-git-tag-version version $(git describe --tags --abbrev=0)
   - |

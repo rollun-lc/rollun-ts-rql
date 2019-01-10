@@ -29,5 +29,5 @@ publish:
   stage: deploy
   script:
     - git fetch origin
-    - npm version from-git
+    - npm version $(git describe --abbrev=0 --tags)
     - npm publish

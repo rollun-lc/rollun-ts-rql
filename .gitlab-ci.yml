@@ -28,6 +28,6 @@ publish:
   - tags
   stage: deploy
   script:
-    - git fetch
+    - git fetch origin
     - npm version from-git
     - npm publish

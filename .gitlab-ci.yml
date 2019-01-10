@@ -26,6 +26,7 @@ run_tests:
 publish:
   only:
   - tags
+  - manual
   stage: deploy
   script:
   - apt-get update

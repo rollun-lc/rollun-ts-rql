@@ -29,17 +29,20 @@ publish:
   - manual
   stage: deploy
   script:
-  - apt-get update
-  - apt-get install -y --no-install-recommends expect
-  - git fetch origin
-  - npm --no-git-tag-version version $(git describe --tags --abbrev=0)
-  - |
-      /usr/bin/expect <<EOD
-      spawn npm adduser
-      expect {
-      "Username: " {send "wewerwer\r"; exp_continue}
-      "Password: " {send "123123\r"; exp_continue}
-      "Email: (this IS public) " {send "mymail@mail.com\r"; exp_continue}
-      }
-      EOD
-  - npm publish
+  - echo $NPM_USER
+  - echo $NPM_PASS
+  - echo $NPM_EMAIL
+  #- apt-get update
+  #- apt-get install -y --no-install-recommends expect
+  #- git fetch origin
+  #- npm --no-git-tag-version version $(git describe --tags --abbrev=0)
+  #- |
+  #    /usr/bin/expect <<EOD
+  #    spawn npm adduser
+  #    expect {
+  #    "Username: " {send "wewerwer\r"; exp_continue}
+  #    "Password: " {send "123123\r"; exp_continue}
+  #    "Email: (this IS public) " {send "mymail@mail.com\r"; exp_continue}
+  #    }
+  #    EOD
+  #- npm publish

@@ -106,7 +106,43 @@ const dataProvider = [
 		}),
 		expectedString: 'select(id,name,age)&sort(+id,+age)',
 		message: 'query with multiple sort nodes'
-	}
+	},
+	{
+		queryObject: new Query({
+			select: new Select(['id', 'name', 'age']),
+			query: new Or([
+				new Like('name', "("),
+				new Like('name', ")"),
+				new Like('name', "-"),
+				new Like('name', "_"),
+				new Like('name', "."),
+				new Like('name', "~"),
+				new Like('name', "*"),
+				new Like('name', "'"),
+				new Like('name', "!"),
+			])
+		}),
+		expectedString: 'select(id,name,age)&or(like(name,%28),like(name,%29),like(name,%2D),like(name,%5F),like(name,%2E),like(name,%7E),like(name,%2A),like(name,%27),like(name,%21))',
+		message: 'query with special characters'
+	},
+	{
+		queryObject: new Query({
+			select: new Select(['id', 'name', 'age']),
+			query: new Or([
+				new Like('name', "=("),
+				new Like('name', "=)"),
+				new Like('name', "*-*"),
+				new Like('name', "T_T"),
+				new Like('name', "0.0"),
+				new Like('name', "~qw"),
+				new Like('name', "o*o"),
+				new Like('name', "ars'"),
+				new Like('name', "run!"),
+			])
+		}),
+		expectedString: 'select(id,name,age)&or(like(name,%3D%28),like(name,%3D%29),like(name,%2A%2D%2A),like(name,T%5FT),like(name,0%2E0),like(name,%7Eqw),like(name,o%2Ao),like(name,ars%27),like(name,run%21))',
+		message: 'query with special characters'
+	},
 ];
 
 suite('Stringification', () => {

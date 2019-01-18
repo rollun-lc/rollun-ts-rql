@@ -5,7 +5,8 @@
   "scripts": {
     "analyse": "node_modules/.bin/tslint --project ./tslint.json",
     "build": "node_modules/.bin/tsc",
-    "test": "node_modules/.bin/intern"
+    "execute-tests": "node_modules/.bin/intern",
+    "test": "npm run build && npm run execute-tests"
   },
   "repository": {
     "type": "git",

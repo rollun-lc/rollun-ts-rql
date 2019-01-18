@@ -22,13 +22,38 @@ export default class QueryStringifier {
 			: result;
 	}
 
+	protected static encodeRql(value: string): string {
+		let encodedValue = encodeURIComponent(value);
+		while (encodedValue.match(/[\(\)\-\_\.\~\!\*\'\!]/g)) {
+			encodedValue = encodedValue
+				.replace('(', '%28')
+				.replace(')', '%29')
+				.replace('-', '%2D')
+				.replace('_', '%5F')
+				.replace('.', '%2E')
+				.replace('~', '%7E')
+				.replace('*', '%2A')
+				.replace("'", '%27')
+				.replace('!', '%21');
+		}
+		return encodedValue;
+	}
+
 	protected static parseTopLevelNode(key: string, node: AbstractNode) {
 		const methodName = `parse${key[0].toUpperCase()}${key.slice(1)}`;
 		return this[methodName](node);
 	}
 
 	protected static parseSelectNode(node?: Select): string {
-		return node ? `select(${node.fields.join(',')})` : '';
+		if (node) {
+			const encodedFieldNames =
+				node.fields.map((fieldName) => {
+					return this.encodeRql(fieldName);
+				});
+
+			return `select(${encodedFieldNames.join(',')})`;
+		}
+		return '';
 	}
 
 	protected static parseSortNode(node?: Sort): string {
@@ -37,7 +62,7 @@ export default class QueryStringifier {
 			result = Object.entries(node.sortOptions).reduce((accumulator, currentItem) => {
 				const [field, direction] = currentItem;
 				const parsedDirection = (direction === 1) ? '+' : '-';
-				accumulator += `${parsedDirection}${field},`;
+				accumulator += `${parsedDirection}${this.encodeRql(field)},`;
 				return accumulator;
 			}, 'sort(');
 			if (result.endsWith(',')) {
@@ -71,12 +96,15 @@ export default class QueryStringifier {
 
 			case (node instanceof AbstractScalarNode):
 				const scalarNode = <AbstractScalarNode> node;
-				result = `${scalarNode.name}(${scalarNode.field},${scalarNode.value})`;
+				result = `${scalarNode.name}(${this.encodeRql(scalarNode.field)},${this.encodeRql(scalarNode.value)})`;
 				break;
 
 			case (node instanceof AbstractArrayNode):
 				const arrayNode = <AbstractArrayNode> node;
-				result = `${arrayNode.name}(${arrayNode.field},(${arrayNode.values.join(',')}))`;
+				const encodedValues = arrayNode.values.map((value) => {
+					return this.encodeRql(value);
+				});
+				result = `${arrayNode.name}(${this.encodeRql(arrayNode.field)},(${encodedValues.join(',')}))`;
 				break;
 		}
 		return result;

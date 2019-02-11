@@ -4,6 +4,7 @@
   "description": "RQL query object and serializer written in TypeScript",
   "scripts": {
     "analyse": "node_modules/.bin/tslint --project ./tslint.json",
+    "fix-style": "node_modules/.bin/tslint --fix --project ./tslint.json",
     "build": "node_modules/.bin/tsc",
     "execute-tests": "node_modules/.bin/intern",
     "test": "npm run build && npm run execute-tests"

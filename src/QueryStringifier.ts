@@ -33,7 +33,7 @@ export default class QueryStringifier {
 				.replace('.', '%2E')
 				.replace('~', '%7E')
 				.replace('*', '%2A')
-				.replace("'", '%27')
+				.replace('\'', '%27')
 				.replace('!', '%21');
 		}
 		return encodedValue;

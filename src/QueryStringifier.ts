@@ -6,6 +6,7 @@ import AbstractNode from './nodes/AbstractNode';
 import AbstractLogicalNode from './nodes/logicalNodes/AbstractLogicalNode';
 import AbstractArrayNode from './nodes/arrayNodes/AbstractArrayNode';
 import AbstractScalarNode from './nodes/scalarNodes/AbstractScalarNode';
+import AggregateFunctionNode from './nodes/aggregateNodes/AggregateFunctionNode';
 
 export default class QueryStringifier {
 	static stringify(query: Query): string {
@@ -48,9 +49,13 @@ export default class QueryStringifier {
 		if (node) {
 			const encodedFieldNames =
 				node.fields.map((fieldName) => {
-					return this.encodeRql(fieldName);
-				});
-
+						if (fieldName instanceof AggregateFunctionNode) {
+							return `${this.encodeRql(fieldName.function)}(${this.encodeRql(fieldName.field)})`;
+						} else {
+							return this.encodeRql(fieldName);
+						}
+					}
+				);
 			return `select(${encodedFieldNames.join(',')})`;
 		}
 		return '';

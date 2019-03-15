@@ -17,6 +17,7 @@ import Le from '../../src/nodes/scalarNodes/Le';
 import Like from '../../src/nodes/scalarNodes/Like';
 import Lt from '../../src/nodes/scalarNodes/Lt';
 import Ne from '../../src/nodes/scalarNodes/Ne';
+import AggregateFunctionNode from '../../src/nodes/aggregateNodes/AggregateFunctionNode';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
@@ -142,7 +143,19 @@ const dataProvider = [
 		}),
 		expectedString: 'select(id,name,age)&or(like(name,%3D%28),like(name,%3D%29),like(name,%2A%2D%2A),like(name,T%5FT),like(name,0%2E0),like(name,%7Eqw),like(name,o%2Ao),like(name,ars%27),like(name,run%21))',
 		message: 'query with words that contain special characters'
-	}
+	},
+	{
+		queryObject: new Query({
+			select: new Select([
+					new AggregateFunctionNode('count', 'age'),
+					new AggregateFunctionNode('min', 'age'),
+					new AggregateFunctionNode('max', 'age'),
+					new AggregateFunctionNode('avg', 'age'),
+			]),
+		}),
+		expectedString: 'select(count(age),min(age),max(age),avg(age))',
+		message: 'query with words that contain special characters'
+	},
 ];
 
 suite('Stringification', () => {

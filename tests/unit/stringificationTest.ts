@@ -150,12 +150,12 @@ const dataProvider = [
 					new AggregateFunctionNode('count', 'age'),
 					new AggregateFunctionNode('min', 'age'),
 					new AggregateFunctionNode('max', 'age'),
-					new AggregateFunctionNode('avg', 'age'),
-			]),
+					new AggregateFunctionNode('avg', 'age')
+			])
 		}),
 		expectedString: 'select(count(age),min(age),max(age),avg(age))',
 		message: 'query with words that contain special characters'
-	},
+	}
 ];
 
 suite('Stringification', () => {

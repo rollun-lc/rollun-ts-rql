@@ -1,12 +1,33 @@
 import AbstractQueryNode from '../AbstractQueryNode';
 
 export default abstract class AbstractArrayNode extends AbstractQueryNode {
-	public field: string;
-	public values: any[];
+
+	protected _field: string;
+	protected _values: any[];
 
 	constructor(field: string, values: any[]) {
 		super();
-		this.field = field;
-		this.values = values;
+		this._field = field;
+		this._values = values;
+	}
+
+	get field(): string {
+		return this._field;
+	}
+
+	set field(value: string) {
+		this._field = value;
+	}
+
+	get values(): any[] {
+		return this._values;
+	}
+
+	set values(value: any[]) {
+		this._values = value;
+	}
+
+	addValue(value: any[]) {
+		this._values.push(value);
 	}
 }

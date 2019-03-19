@@ -2,10 +2,22 @@ import AbstractQueryNode from '../AbstractQueryNode';
 import AbstractNode from '../AbstractNode';
 
 export default abstract class AbstractLogicalNode extends AbstractQueryNode {
-	public subNodes;
+	protected _subNodes;
 
-	constructor(subNodes: AbstractNode[]) {
+	constructor(subNodes: AbstractQueryNode[]) {
 		super();
-		this.subNodes = subNodes;
+		this._subNodes = subNodes;
+	}
+
+	get subNodes() {
+		return this._subNodes;
+	}
+
+	set subNodes(subNodes: AbstractQueryNode[]) {
+		this._subNodes = subNodes;
+	}
+
+	addNode(node: AbstractQueryNode) {
+
 	}
 }

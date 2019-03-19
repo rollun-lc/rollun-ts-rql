@@ -8,11 +8,20 @@ export interface SortOptions {
 }
 
 export default class Sort extends AbstractNode {
+
 	readonly name = 'sort';
-	public sortOptions;
+	private _sortOptions;
 
 	constructor(sortOptions: SortOptions) {
 		super();
-		this.sortOptions = sortOptions;
+		this._sortOptions = sortOptions;
+	}
+
+	get sortOptions() {
+		return this._sortOptions;
+	}
+
+	set sortOptions(value) {
+		this._sortOptions = value;
 	}
 }

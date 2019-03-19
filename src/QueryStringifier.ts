@@ -41,7 +41,11 @@ export default class QueryStringifier {
 	}
 
 	protected static parseTopLevelNode(key: string, node: AbstractNode) {
-		const methodName = `parse${key[0].toUpperCase()}${key.slice(1)}`;
+		let cleanKey = key;
+		if (cleanKey[0] === '_' ) { // remove underscore to enable protected and private methods usage
+			cleanKey = key.slice(1);
+		}
+		const methodName = `parse${cleanKey[0].toUpperCase()}${cleanKey.slice(1)}`;
 		return this[methodName](node);
 	}
 

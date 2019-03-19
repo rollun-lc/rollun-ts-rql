@@ -27,7 +27,11 @@ export default abstract class AbstractArrayNode extends AbstractQueryNode {
 		this._values = value;
 	}
 
-	addValue(value: any[]) {
+	addValue(value: any) {
 		this._values.push(value);
+	}
+
+	removeValue(index: number) {
+		this._values.splice(index, 1);
 	}
 }

@@ -18,6 +18,10 @@ export default abstract class AbstractLogicalNode extends AbstractQueryNode {
 	}
 
 	addNode(node: AbstractQueryNode) {
+		this._subNodes.push(node);
+	}
 
+	removeNode(index: number) {
+		this._subNodes.splice(index, 1);
 	}
 }

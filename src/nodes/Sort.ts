@@ -17,11 +17,11 @@ export default class Sort extends AbstractNode {
 		this._sortOptions = sortOptions;
 	}
 
-	get sortOptions() {
+	get sortOptions(): SortOptions {
 		return this._sortOptions;
 	}
 
-	set sortOptions(value) {
+	set sortOptions(value: SortOptions) {
 		this._sortOptions = value;
 	}
 }

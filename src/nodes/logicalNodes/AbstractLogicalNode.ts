@@ -9,7 +9,7 @@ export default abstract class AbstractLogicalNode extends AbstractQueryNode {
 		this._subNodes = subNodes;
 	}
 
-	get subNodes() {
+	get subNodes(): AbstractQueryNode[] {
 		return this._subNodes;
 	}
 

@@ -13,8 +13,13 @@ export default class TokenStream {
 		return this.tokens.length;
 	}
 
+	get length(): number {
+		return this.tokens.length;
+	}
+
 	next(): Token {
-		if (this.tokens[this.current + 1]) {
+		this.current += 1;
+		if (this.tokens[this.current]) {
 			return this.tokens[this.current - 1];
 		} else {
 			throw new Error('Unexpected end of stream');

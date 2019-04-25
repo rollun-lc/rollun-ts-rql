@@ -6,8 +6,8 @@
     "analyse": "node_modules/.bin/tslint --project ./tslint.json",
     "fix-style": "node_modules/.bin/tslint --fix --project ./tslint.json",
     "build": "node_modules/.bin/tsc",
-    "execute-tests": "node_modules/.bin/intern",
-    "test": "npm run build && npm run execute-tests"
+    "run-tests": "node_modules/.bin/intern",
+    "test": "npm run build && npm run run-tests"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
+    "locutus": "^2.0.10",
+    "lodash": "^4.17.11"
   },
   "files": [
     "dist/*"

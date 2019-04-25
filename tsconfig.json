@@ -5,15 +5,27 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+      "es7",
+      "es2018",
+      "es2015.promise",
+      "es2015.iterable",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "esnext"
+    ]
   },
   "exclude": [
     "node_modules",
     "dist",
-    "misc-stuff",
-    "tests"
+    "misc-stuff"
   ],
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "test/**/*"
   ]
 }

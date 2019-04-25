@@ -1,10 +1,11 @@
 import Token, { TokenTypeNameMap } from '../Token';
 import { SubLexerInterface } from '../interfaces';
+import Glob from '../Glob';
 
 export default class GlobSubLexer implements SubLexerInterface {
 
 	getTokenAt(code, cursor) {
-		const matches = code.match(new RegExp('/([a-z0-9\*\?]|\%[0-9a-f]{2})+/', 'Ai'));
+		const matches = code.slice(cursor).match(new RegExp('^([a-z0-9\*\?]|\%[0-9a-f]{2})+', 'i'));
 		if (!matches) {
 			return null;
 		}
@@ -19,9 +20,9 @@ export default class GlobSubLexer implements SubLexerInterface {
 	}
 
 	decodeGlob(glob) {
-		return glob.replace(new RegExp('/[^\*\?]+/', 'i'),
+		return glob.replace(new RegExp('[\^\*\?]+', 'i'),
 			(encoded) => {
-				return Glob.encode(encodeURIComponent(encoded[0]));
+				return Glob.encode(decodeURIComponent(encoded));
 			}
 		);
 	}

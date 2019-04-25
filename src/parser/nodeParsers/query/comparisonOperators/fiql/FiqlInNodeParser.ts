@@ -1,7 +1,7 @@
 import In from '../../../../../nodes/arrayNodes/In';
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 
-class InNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlInNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'in';

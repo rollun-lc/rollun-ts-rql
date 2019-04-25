@@ -1,7 +1,7 @@
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 import Ge from '../../../../../nodes/scalarNodes/Ge';
 
-class GeNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlGeNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'ge';

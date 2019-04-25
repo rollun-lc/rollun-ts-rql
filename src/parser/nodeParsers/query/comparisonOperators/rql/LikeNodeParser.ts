@@ -1,7 +1,7 @@
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 import Like from '../../../../../nodes/scalarNodes/Like';
 
-class LikeNodeParser extends AbstractComparisonRqlNodeParser {
+export default class LikeNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'like';

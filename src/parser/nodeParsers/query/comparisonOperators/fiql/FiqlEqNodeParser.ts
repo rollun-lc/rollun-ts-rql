@@ -1,7 +1,7 @@
 import Eq from '../../../../../nodes/scalarNodes/Eq';
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 
-class EqNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlEqNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'eq';

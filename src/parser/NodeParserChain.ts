@@ -2,7 +2,7 @@ import { NodeParserInterface } from './interfaces';
 import TokenStream from './TokenStream';
 
 export default class NodeParserChain implements NodeParserInterface {
-	protected nodeParsers;
+	protected nodeParsers: NodeParserInterface[] = [];
 
 	addNodeParser(nodeParser: NodeParserInterface) {
 		this.nodeParsers.push(nodeParser);

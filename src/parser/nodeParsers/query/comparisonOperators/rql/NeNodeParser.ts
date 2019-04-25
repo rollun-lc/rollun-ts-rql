@@ -1,7 +1,7 @@
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 import Ne from '../../../../../nodes/scalarNodes/Ne';
 
-class NeNodeParser extends AbstractComparisonRqlNodeParser {
+export default class NeNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'ne';

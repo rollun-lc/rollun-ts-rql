@@ -25,16 +25,17 @@ export default class GroupNodeParser implements NodeParserInterface {
 				if (operator !== TokenTypeNameMap.T_AMPERSAND) {
 					throw new SyntaxError('Cannot mix "&" and "|" within a group');
 				}
-			}
-			if (tokenStream.nextIf(TokenTypeNameMap.T_VERTICAL_BAR)) {
-				if (operator === null) {
-					operator = TokenTypeNameMap.T_VERTICAL_BAR;
-				}
-				if (operator !== TokenTypeNameMap.T_VERTICAL_BAR) {
-					throw new SyntaxError('Cannot mix "&" and "|" within a group');
-				}
 			} else {
-				break;
+				if (tokenStream.nextIf(TokenTypeNameMap.T_VERTICAL_BAR)) {
+					if (operator === null) {
+						operator = TokenTypeNameMap.T_VERTICAL_BAR;
+					}
+					if (operator !== TokenTypeNameMap.T_VERTICAL_BAR) {
+						throw new SyntaxError('Cannot mix "&" and "|" within a group');
+					}
+				} else {
+					break;
+				}
 			}
 		} while (true);
 		tokenStream.expect(TokenTypeNameMap.T_CLOSE_PARENTHESIS);

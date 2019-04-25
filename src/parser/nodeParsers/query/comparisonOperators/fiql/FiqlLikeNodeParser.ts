@@ -1,7 +1,7 @@
 import Like from '../../../../../nodes/scalarNodes/Like';
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 
-class LikeNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlLikeNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'like';

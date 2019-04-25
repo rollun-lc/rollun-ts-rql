@@ -1,7 +1,7 @@
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 import Ge from '../../../../../nodes/scalarNodes/Ge';
 
-class GeNodeParser extends AbstractComparisonRqlNodeParser {
+export default class GeNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'ge';

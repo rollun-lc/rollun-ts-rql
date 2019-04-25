@@ -1,7 +1,7 @@
 import Eq from '../../../../../nodes/scalarNodes/Eq';
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 
-class EqNodeParser extends AbstractComparisonRqlNodeParser {
+export default class EqNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'eq';

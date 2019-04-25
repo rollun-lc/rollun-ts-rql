@@ -1,7 +1,7 @@
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 import Lt from '../../../../../nodes/scalarNodes/Lt';
 
-class LtNodeParser extends AbstractComparisonRqlNodeParser {
+export default class LtNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'lt';

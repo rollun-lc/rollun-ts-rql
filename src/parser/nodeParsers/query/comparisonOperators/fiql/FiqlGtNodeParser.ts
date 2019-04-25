@@ -1,7 +1,7 @@
 import Gt from '../../../../../nodes/scalarNodes/Gt';
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 
-class GtNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlGtNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'gt';

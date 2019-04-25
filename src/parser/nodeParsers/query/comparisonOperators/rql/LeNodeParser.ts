@@ -1,7 +1,7 @@
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 import Le from '../../../../../nodes/scalarNodes/Le';
 
-class LeNodeParser extends AbstractComparisonRqlNodeParser {
+export default class LeNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'le';

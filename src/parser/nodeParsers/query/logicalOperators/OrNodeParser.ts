@@ -1,4 +1,5 @@
 import AbstractLogicalOperatorNodeParser from './AbstractLogicalOperatorNodeParser';
+import Or from '../../../../nodes/logicalNodes/Or';
 
 export default class OrNodeParser extends AbstractLogicalOperatorNodeParser {
 
@@ -8,10 +9,10 @@ export default class OrNodeParser extends AbstractLogicalOperatorNodeParser {
 
 	protected createNode(queries: any[]) {
 		if (queries.length < 2) {
-			throw new SyntaxErrorException(
+			throw new SyntaxError(
 				`"${this.getOperatorName()}" operator expects at least 2 parameters, ${queries.length} given`,
 			);
 		}
-		return new OrNode(queries);
+		return new Or(queries);
 	}
 }

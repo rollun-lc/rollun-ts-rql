@@ -19,6 +19,25 @@ import NodeParserChain from './parser/NodeParserChain';
 import BooleanTypeCaster from './parser/typeCasters/BooleanTypeCaster';
 import ScalarParser from './parser/valueParsers/ScalarParser';
 import TokenStream from './parser/TokenStream';
+import InNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/InNodeParser';
+import OutNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/OutNodeParser';
+import NeNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/NeNodeParser';
+import LtNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/LtNodeParser';
+import GtNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/GtNodeParser';
+import EqNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/EqNodeParser';
+import LeNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/LeNodeParser';
+import GeNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/GeNodeParser';
+import LikeNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/LikeNodeParser';
+import FiqlInNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlInNodeParser';
+import FiqlOutNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlOutNodeParser';
+import FiqlEqNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlEqNodeParser';
+import FiqlNeNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlNeNodeParser';
+import FiqlLtNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlLtNodeParser';
+import FiqlGtNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlGtNodeParser';
+import FiqlLeNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlLeNodeParser';
+import FiqlLikeNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlLikeNodeParser';
+import FiqlGeNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlGeNodeParser';
+import QueryBuilder from './QueryBuilder';
 
 export default class Parser {
 
@@ -62,15 +81,15 @@ export default class Parser {
 			.addNodeParser(new LeNodeParser(fieldParser, scalarParser))
 			.addNodeParser(new GeNodeParser(fieldParser, scalarParser))
 			.addNodeParser(new LikeNodeParser(fieldParser, globParser))
-			.addNodeParser(new InNodeParser(fieldParser, arrayParser))
-			.addNodeParser(new OutNodeParser(fieldParser, arrayParser))
-			.addNodeParser(new EqNodeParser(fieldParser, scalarParser))
-			.addNodeParser(new NeNodeParser(fieldParser, scalarParser))
-			.addNodeParser(new LtNodeParser(fieldParser, scalarParser))
-			.addNodeParser(new GtNodeParser(fieldParser, scalarParser))
-			.addNodeParser(new LeNodeParser(fieldParser, scalarParser))
-			.addNodeParser(new GeNodeParser(fieldParser, scalarParser))
-			.addNodeParser(new LikeNodeParser(fieldParser, globParser));
+			.addNodeParser(new FiqlInNodeParser(fieldParser, arrayParser))
+			.addNodeParser(new FiqlOutNodeParser(fieldParser, arrayParser))
+			.addNodeParser(new FiqlEqNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new FiqlNeNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new FiqlLtNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new FiqlGtNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new FiqlLeNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new FiqlGeNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new FiqlLikeNodeParser(fieldParser, globParser));
 		return (new NodeParserChain())
 			.addNodeParser(queryNodeParser)
 			.addNodeParser(new SelectNodeParser(fieldParser))

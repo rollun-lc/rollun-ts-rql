@@ -1,7 +1,7 @@
 import In from '../../../../../nodes/arrayNodes/In';
 import AbstractComparisonRqlNodeParser from './AbstractComparisonRqlNodeParser';
 
-class InNodeParser extends AbstractComparisonRqlNodeParser {
+export default class InNodeParser extends AbstractComparisonRqlNodeParser {
 
 	protected getOperatorName() {
 		return 'in';

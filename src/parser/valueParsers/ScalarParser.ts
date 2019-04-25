@@ -7,7 +7,7 @@ export default class ScalarParser implements SubParserInterface {
 	/**
 	 * @var TypeCasterInterface[]
 	 */
-	protected typeCasters: TypeCasterInterface[] = [];
+	protected typeCasters: {[key: string]: TypeCasterInterface} = {};
 
 	/**
 	 * @inheritdoc
@@ -59,7 +59,7 @@ export default class ScalarParser implements SubParserInterface {
 			return token.value;
 		}
 		if (token.test(TokenTypeNameMap.T_INTEGER)) {
-			return token.value;
+			return Number(token.value);
 		}
 		if (token.test(TokenTypeNameMap.T_FLOAT)) {
 			return Number(token.value);

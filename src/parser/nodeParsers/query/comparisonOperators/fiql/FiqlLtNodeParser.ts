@@ -1,7 +1,7 @@
 import Lt from '../../../../../nodes/scalarNodes/Lt';
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 
-class LtNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlLtNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'lt';

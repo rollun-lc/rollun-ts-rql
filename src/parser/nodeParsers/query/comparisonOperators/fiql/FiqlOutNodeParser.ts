@@ -1,7 +1,7 @@
 import Out from '../../../../../nodes/arrayNodes/Out';
 import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser';
 
-class OutNodeParser extends AbstractComparisonFiqlNodeParser {
+export default class FiqlOutNodeParser extends AbstractComparisonFiqlNodeParser {
 
 	protected getOperatorName() {
 		return 'out';

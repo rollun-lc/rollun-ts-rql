@@ -80,7 +80,7 @@ const dataForTokenizationTest = {
 			['*abc?', TokenTypeNameMap.T_GLOB],
 		],
 	],
-	'string encoding': [ // FIXME
+	'string encoding': [
 		`in(a,(${'+abc'},${encodeString('+abc')},${'-abc'},${encodeString('-abc')},${'null()'},${encodeString('null()')},${'2015-04-19T21:00:00Z'},${encodeString('2015-04-19T21:00:00Z')},${'1.1e+3'},${encodeString('1.1e+3')}))&like(b,${'*abc?'})&eq(c,${encodeString('*abc?')})`,
 		[
 			['in', TokenTypeNameMap.T_OPERATOR],

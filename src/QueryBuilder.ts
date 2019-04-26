@@ -5,6 +5,7 @@ import Limit from './nodes/Limit';
 import Sort from './nodes/Sort';
 import Select from './nodes/Select';
 import And from './nodes/logicalNodes/And';
+import AbstractLogicalNode from './nodes/logicalNodes/AbstractLogicalNode';
 
 export default class QueryBuilder {
 
@@ -18,8 +19,7 @@ export default class QueryBuilder {
 		if (node instanceof Select) {
 			return this.addSelect(node);
 		}
-		if (node instanceof AbstractQueryNode)
-		{
+		if (node instanceof AbstractQueryNode) {
 			return this.addQuery(node);
 		}
 		if (node instanceof Sort) {
@@ -42,14 +42,14 @@ export default class QueryBuilder {
 
 	addQuery(query: AbstractQueryNode) {
 		const current = this.query.queryNode;
-		if (current === null) {
-			this.query.queryNode =query;
-		}
-		if (current instanceof And)
-		{
-			current.addNode(query);
+		if (!current) {
+			this.query.queryNode = query;
 		} else {
-			this.query.queryNode = new And([current, query]);
+			if (current instanceof AbstractLogicalNode) {
+				current.addNode(query);
+			} else {
+				this.query.queryNode = new And([current, query]);
+			}
 		}
 		return this;
 	}

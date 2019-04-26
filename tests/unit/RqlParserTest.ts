@@ -20,6 +20,7 @@ import Or from '../../src/nodes/logicalNodes/Or';
 import Lt from '../../src/nodes/scalarNodes/Lt';
 import Gt from '../../src/nodes/scalarNodes/Gt';
 import In from '../../src/nodes/arrayNodes/In';
+import AggregateSelect from '../../src/nodes/aggregateNodes/AggregateSelect';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
@@ -51,7 +52,7 @@ suite('RQL Parser Test', () => {
 			rqlString += '&sort(-q,+w,e)';
 			rqlString += '&select(q,max(q),min(q),count(q))';
 			const expectedQueryObject = new Query({
-				select: new Select([
+				select: new AggregateSelect([
 					'q',
 					(new AggregateFunctionNode('max', 'q')),
 					(new AggregateFunctionNode('min', 'q')),

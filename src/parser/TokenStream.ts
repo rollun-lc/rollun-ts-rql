@@ -54,9 +54,7 @@ export default class TokenStream {
 			? value
 			: [value];
 		const token = this.getCurrent();
-		if (this.test(type, value)) {
-
-		} else {
+		if (!this.test(type, value)) {
 			const expectedMessage = value
 				? `expected ${(normalizedType.map(() => `"${value}"`)).join('|')} (${normalizedType.join('|')})`
 				: `expected ${normalizedType.join('|')}`;

@@ -20,7 +20,7 @@ export default class GlobSubLexer implements SubLexerInterface {
 	}
 
 	decodeGlob(glob) {
-		return glob.replace(new RegExp('[\^\*\?]+', 'i'),
+		return glob.replace(new RegExp(/[^\*\?]+/, 'i'),
 			(encoded) => {
 				return Glob.encode(decodeURIComponent(encoded));
 			}

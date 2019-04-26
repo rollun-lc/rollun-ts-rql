@@ -47,7 +47,8 @@ export default class Lexer {
 	}
 
 	tokenize(code: string) {
-		const uriDecodedCode = decodeURIComponent(code);
+		//const uriDecodedCode = decodeURIComponent(code);
+		const uriDecodedCode = code;
 		const end = uriDecodedCode.length;
 		let cursor = 0;
 		const tokens = [];

@@ -6,12 +6,15 @@ const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
 
 function encodeString(value: string) {
-	return encodeURIComponent(value).replace(/[-_.~']/, (value: string) => {
+	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/, 'g'), (value: string) => {
 		const encodingMap = {
 			'-': '%2D',
 			'_': '%5F',
 			'.': '%2E',
 			'~': '%7E',
+			'(': '%28',
+			')': '%29',
+			'*': '%2A'
 		};
 		return encodingMap[value];
 	});
@@ -77,7 +80,7 @@ const dataForTokenizationTest = {
 			['*abc?', TokenTypeNameMap.T_GLOB],
 		],
 	],
-/*	'string encoding': [ // FIXME
+	'string encoding': [ // FIXME
 		`in(a,(${'+abc'},${encodeString('+abc')},${'-abc'},${encodeString('-abc')},${'null()'},${encodeString('null()')},${'2015-04-19T21:00:00Z'},${encodeString('2015-04-19T21:00:00Z')},${'1.1e+3'},${encodeString('1.1e+3')}))&like(b,${'*abc?'})&eq(c,${encodeString('*abc?')})`,
 		[
 			['in', TokenTypeNameMap.T_OPERATOR],
@@ -123,7 +126,7 @@ const dataForTokenizationTest = {
 			['*abc?', TokenTypeNameMap.T_STRING],
 			[')', TokenTypeNameMap.T_CLOSE_PARENTHESIS],
 		],
-	],*/
+	],
 	'datetime support': [
 		'in(a,(2015-04-16T17:40:32Z,2012-02-29T17:40:32Z))',
 		[

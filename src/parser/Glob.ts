@@ -27,7 +27,12 @@ export default class Glob {
 
 	toRql(): string {
 		return this.decoder('*', '?', (char: string) => {
-			return locutus.php.strings.strtr(encodeURIComponent(char));
+			return locutus.php.strings.strtr(encodeURIComponent(char), {
+				'-': '%2D',
+				'_': '%5F',
+				'.': '%2E',
+				'~': '%7E',
+			});
 		});
 	}
 

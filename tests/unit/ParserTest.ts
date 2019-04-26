@@ -25,12 +25,15 @@ const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
 
 function encodeString(value: string) {
-	return encodeURIComponent(value).replace(/[-_.~']/, (value: string) => {
+	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/,'g'), (value: string) => {
 		const encodingMap = {
 			'-': '%2D',
 			'_': '%5F',
 			'.': '%2E',
 			'~': '%7E',
+			'(': '%28',
+			')': '%29',
+			'*': '%2A'
 		};
 		return encodingMap[value];
 	});
@@ -295,8 +298,8 @@ const dataForParsingTest = {
 			]))
 			.getQuery(),
 	],
-/*	'string encoding': [ //FIXME same error in lexer
-		`in(a,(${encodeString('+a-b:c')},null(),${encodeString('null()')},'2015-04-19T21:00:00Z',${encodeString('2015-04-19T21:00:00Z')},'1.1e+3',${encodeString('1.1e+3')}))&like(b,${'*abc?'})&eq(c,${encodeString('*abc?')})`,
+	'string encoding': [
+		`in(a,(${encodeString('+a-b:c')},null(),${encodeString('null()')},2015-04-19T21:00:00Z,${encodeString('2015-04-19T21:00:00Z')},1.1e+3,${encodeString('1.1e+3')}))&like(b,${'*abc?'})&eq(c,${encodeString('*abc?')})`,
 		(new QueryBuilder())
 			.addQuery(new In('a', [
 				'+a-b:c',
@@ -310,7 +313,7 @@ const dataForParsingTest = {
 			.addQuery(new Like('b', new Glob('*abc?')))
 			.addQuery(new Eq('c', '*abc?'))
 			.getQuery(),
-	],*/
+	],
 	'long integers': [
 		`in(a,(9223372036854775806,-9223372036854775807,9223372036854775807,-9223372036854775808,9223372036854775808,-9223372036854775809,9223372036854775809,-9223372036854775810))`,
 

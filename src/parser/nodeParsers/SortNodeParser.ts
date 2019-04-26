@@ -1,7 +1,7 @@
 import { TokenTypeNameMap } from '../Token';
 import TokenStream from '../TokenStream';
 import { NodeParserInterface, SubParserInterface } from '../interfaces';
-import Sort, { SORT_ASC, SORT_DESC, SortOptions } from '../../nodes/Sort';
+import Sort, { SortOptions } from '../../nodes/Sort';
 
 export default class SortNodeParser implements NodeParserInterface {
 
@@ -12,14 +12,14 @@ export default class SortNodeParser implements NodeParserInterface {
 	}
 
 	parse(tokenStream: TokenStream) {
-		const fields = <SortOptions> {};
+		const fields = <SortOptions>{};
 		tokenStream.expect(TokenTypeNameMap.T_OPERATOR, 'sort');
 		tokenStream.expect(TokenTypeNameMap.T_OPEN_PARENTHESIS);
 		do {
 			const direction = tokenStream.expect([TokenTypeNameMap.T_PLUS, TokenTypeNameMap.T_MINUS]);
 			fields[this.fieldNameParser.parse(tokenStream)] = direction.test(TokenTypeNameMap.T_PLUS) ?
-				SORT_ASC :
-				SORT_DESC;
+				1 :
+				-1;
 			if (!tokenStream.nextIf(TokenTypeNameMap.T_COMMA)) {
 				break;
 			}

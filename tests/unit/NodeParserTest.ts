@@ -1,6 +1,6 @@
 import intern from 'intern';
 import Lexer from '../../src/parser/Lexer';
-import Parser from '../../src/Parser';
+import Parser from '../../src/parser/Parser';
 import * as lodash from 'lodash';
 import Query from '../../src/Query';
 import QueryBuilder from '../../src/QueryBuilder';
@@ -15,7 +15,7 @@ import Glob from '../../src/parser/Glob';
 import In from '../../src/nodes/arrayNodes/In';
 import Out from '../../src/nodes/arrayNodes/Out';
 import And from '../../src/nodes/logicalNodes/And';
-import Sort, { SORT_ASC, SORT_DESC } from '../../src/nodes/Sort';
+import Sort from '../../src/nodes/Sort';
 import Select from '../../src/nodes/Select';
 import Limit from '../../src/nodes/Limit';
 import Or from '../../src/nodes/logicalNodes/Or';
@@ -113,8 +113,8 @@ const dataForParsingTest = {
 		(new QueryBuilder())
 			.addSelect(new Select(['a', 'b', 'c']))
 			.addSort(new Sort({
-				'a': SORT_ASC,
-				'b': SORT_DESC,
+				'a': 1,
+				'b': -1,
 			}))
 			.addLimit(new Limit(1, 2))
 			.getQuery(),

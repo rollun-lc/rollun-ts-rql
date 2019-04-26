@@ -26,7 +26,7 @@ export default class TokenStream {
 		}
 	}
 
-	nextIf(type: TokenTypeNameMap, value?: string): Token | null {
+	nextIf(type: TokenTypeNameMap, value?: string| string[]): Token | null {
 		if (this.test(type, value)) {
 			return this.next();
 		} else {
@@ -34,7 +34,7 @@ export default class TokenStream {
 		}
 	}
 
-	test(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string): boolean {
+	test(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string| string[]): boolean {
 		return this.tokens[this.current].test(type, value);
 	}
 
@@ -46,7 +46,7 @@ export default class TokenStream {
 		}
 	}
 
-	expect(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string) {
+	expect(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string| string[]) {
 		const normalizedType = Array.isArray(type)
 			? type
 			: [type];

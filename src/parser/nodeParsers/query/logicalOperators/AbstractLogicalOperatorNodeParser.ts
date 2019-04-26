@@ -20,10 +20,7 @@ export default abstract class AbstractLogicalOperatorNodeParser implements NodeP
 		let queries = [];
 		do {
 			queries.push(this.conditionParser.parse(tokenStream));
-			if (!tokenStream.nextIf(TokenTypeNameMap.T_COMMA)) {
-				break;
-			}
-		} while (true);
+		} while (tokenStream.nextIf(TokenTypeNameMap.T_COMMA) !== null);
 		tokenStream.expect(TokenTypeNameMap.T_CLOSE_PARENTHESIS);
 		return this.createNode(queries);
 	}

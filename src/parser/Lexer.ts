@@ -47,16 +47,14 @@ export default class Lexer {
 	}
 
 	tokenize(code: string) {
-		//const uriDecodedCode = decodeURIComponent(code);
-		const uriDecodedCode = code;
-		const end = uriDecodedCode.length;
+		const end = code.length;
 		let cursor = 0;
 		const tokens = [];
 		while (cursor < end) {
-			const token = this.subLexer.getTokenAt(uriDecodedCode, cursor);
+			const token = this.subLexer.getTokenAt(code, cursor);
 			if (token === null) {
 				throw new SyntaxError(
-					`Invalid character "${uriDecodedCode[cursor]}" at position ${cursor}`,
+					`Invalid character "${code[cursor]}" at position ${cursor}`,
 				);
 			}
 			tokens.push(token);

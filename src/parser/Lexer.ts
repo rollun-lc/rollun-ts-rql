@@ -46,7 +46,7 @@ export default class Lexer {
 			.addSubLexer(new SortSubLexer());
 	}
 
-	tokenize(code) {
+	tokenize(code: string) {
 		const end = code.length;
 		let cursor = 0;
 		const tokens = [];

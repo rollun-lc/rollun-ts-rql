@@ -4,18 +4,18 @@ import Token, { TokenTypeNameMap } from '../Token';
 export default class DatetimeSubLexer implements SubLexerInterface {
 
 	getTokenAt(code, cursor) {
-		const regExp = new RegExp('/(?<y>\d{4})-(?<m>\d{2})-(?<d>\d{2})T(?<h>\d{2}):(?<i>\d{2}):(?<s>\d{2})Z/', 'A');
-		const matches = code.match(regExp);
+		const regExp = new RegExp(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/);
+		const matches = decodeURIComponent(code.slice(cursor)).match(regExp);
 		if (!matches) {
 			return null;
 		}
 		if (
-			matches['m'] < 12
-			&& matches['d'] < 31
-			&& matches['y'] < 32767
-			&& matches['h'] < 24
-			&& matches['i'] < 60
-			&& matches['s'] < 60
+			Number(matches[1]) < 32767 // years
+			&& Number(matches[2]) < 12 // months
+			&& Number(matches[3]) < 32 // days
+			&& Number(matches[4]) < 24 // hours
+			&& Number(matches[5]) < 60 // minutes
+			&& Number(matches[6]) < 60 // seconds
 		) {
 			return new Token(
 				TokenTypeNameMap.T_DATE,

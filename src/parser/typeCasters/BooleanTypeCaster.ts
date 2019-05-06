@@ -19,7 +19,7 @@ export default class BooleanTypeCaster implements TypeCasterInterface {
 		if (token.test(TokenTypeNameMap.T_DATE)) {
 			return token.value !== '0000-00-00T00:00:00Z';
 		} else {
-			return Boolean(token.value);
+			return token.value !== '0' && Boolean(token.value);
 		}
 	}
 }

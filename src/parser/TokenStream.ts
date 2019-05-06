@@ -13,15 +13,20 @@ export default class TokenStream {
 		return this.tokens.length;
 	}
 
+	get length(): number {
+		return this.tokens.length;
+	}
+
 	next(): Token {
-		if (this.tokens[this.current + 1]) {
+		this.current += 1;
+		if (this.tokens[this.current]) {
 			return this.tokens[this.current - 1];
 		} else {
 			throw new Error('Unexpected end of stream');
 		}
 	}
 
-	nextIf(type: TokenTypeNameMap, value?: string): Token | null {
+	nextIf(type: TokenTypeNameMap, value?: string| string[]): Token | null {
 		if (this.test(type, value)) {
 			return this.next();
 		} else {
@@ -29,7 +34,7 @@ export default class TokenStream {
 		}
 	}
 
-	test(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string): boolean {
+	test(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string| string[]): boolean {
 		return this.tokens[this.current].test(type, value);
 	}
 
@@ -41,7 +46,7 @@ export default class TokenStream {
 		}
 	}
 
-	expect(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string) {
+	expect(type: TokenTypeNameMap | TokenTypeNameMap[], value?: string| string[]) {
 		const normalizedType = Array.isArray(type)
 			? type
 			: [type];
@@ -49,9 +54,7 @@ export default class TokenStream {
 			? value
 			: [value];
 		const token = this.getCurrent();
-		if (this.test(type, value)) {
-
-		} else {
+		if (!this.test(type, value)) {
 			const expectedMessage = value
 				? `expected ${(normalizedType.map(() => `"${value}"`)).join('|')} (${normalizedType.join('|')})`
 				: `expected ${normalizedType.join('|')}`;

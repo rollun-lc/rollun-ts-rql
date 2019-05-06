@@ -14,7 +14,7 @@ export enum FiqlOperatorMap {
 
 export default class FiqlOperatorSubLexer implements SubLexerInterface {
 	getTokenAt(code, cursor) {
-		const matches = code.match(new RegExp('/(=[a-z]\w*=|==|!=|<>|>=|<=|<|>|==|=)/', 'Ai'));
+		const matches = code.slice(cursor).match(new RegExp('^(=[a-z]\\w*=|!=|<>|>=|<=|<|>|==|=)', 'i'));
 		if (matches) {
 			return new Token(
 				TokenTypeNameMap.T_OPERATOR,

@@ -17,9 +17,15 @@ export class IntegerTypeCaster implements TypeCasterInterface {
 		}
 		if (token.test(TokenTypeNameMap.T_DATE)) {
 			const date = new Date(token.value);
-			return parseInt(`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`, 10);
+			const dateMonth = String(date.getMonth()).length === 2 ? 1 + date.getMonth() :('0' + (1 + date.getMonth()));
+			const dateDay = String(date.getDate()).length === 2 ? date.getDate() :('0' + date.getDate());
+			const dateHours = String(date.getUTCHours()).length === 2 ? date.getUTCHours() :('0' + date.getUTCHours());
+			const dateMinutes = String(date.getMinutes()).length === 2 ? date.getMinutes() :('0' + date.getMinutes());
+			const dateSeconds = String(date.getSeconds()).length === 2 ? date.getSeconds() :('0' + date.getSeconds());
+			return parseInt(`${date.getFullYear()}${dateMonth}${dateDay}${dateHours}${dateMinutes}${dateSeconds}`, 10);
 		} else {
-			return parseInt(token.value, 10);
+			const parsedValue = parseInt(token.value, 10);
+			return isNaN(parsedValue) ? 0 : parsedValue;
 		}
 	}
 }

@@ -2,7 +2,6 @@ import intern from 'intern';
 import Query from '../../src/Query';
 import * as lodash from 'lodash';
 import RqlParser from '../../src/RqlParser';
-import Select from '../../src/nodes/Select';
 import AggregateFunctionNode from '../../src/nodes/aggregateNodes/AggregateFunctionNode';
 import Sort from '../../src/nodes/Sort';
 import Limit from '../../src/nodes/Limit';

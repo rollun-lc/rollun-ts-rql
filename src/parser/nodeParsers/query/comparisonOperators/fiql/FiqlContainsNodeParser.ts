@@ -3,13 +3,11 @@ import AbstractComparisonFiqlNodeParser from './AbstractComparisonFiqlNodeParser
 
 export default class FiqlContainsNodeParser extends AbstractComparisonFiqlNodeParser {
 
-	protected getOperatorName()
-	{
+	protected getOperatorName() {
 		return 'contains';
 	}
 
-	protected createNode(field, value)
-	{
+	protected createNode(field, value) {
 		return new Contains(field, value);
 	}
 }

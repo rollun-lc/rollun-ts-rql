@@ -12,7 +12,7 @@ export default class SortNodeParser implements NodeParserInterface {
 	}
 
 	parse(tokenStream: TokenStream) {
-		const fields = <SortOptions>{};
+		const fields = <SortOptions> {};
 		tokenStream.expect(TokenTypeNameMap.T_OPERATOR, 'sort');
 		tokenStream.expect(TokenTypeNameMap.T_OPEN_PARENTHESIS);
 		do {

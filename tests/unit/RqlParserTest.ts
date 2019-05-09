@@ -31,12 +31,12 @@ suite('RQL Parser Test', () => {
 			{
 				query: new And([
 					new And([
-						new Ne('a',3),
-						new Ne('a',8),
+						new Ne('a', 3),
+						new Ne('a', 8),
 					]),
 					new Or([
-						new Ne('b',3),
-						new Ne('b',8),
+						new Ne('b', 3),
+						new Ne('b', 8),
 					])
 				])
 			}

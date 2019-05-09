@@ -28,7 +28,7 @@ export default class QueryBuilder {
 		if (node instanceof Limit) {
 			return this.addLimit(node);
 		}
-		throw new Error(`Unknown node "${node.name}"`,);
+		throw new Error(`Unknown node "${node.name}"`, );
 	}
 
 	getQuery() {

@@ -25,7 +25,7 @@ const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
 
 function encodeString(value: string) {
-	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/,'g'), (value: string) => {
+	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/, 'g'), (value: string) => {
 		const encodingMap = {
 			'-': '%2D',
 			'_': '%5F',

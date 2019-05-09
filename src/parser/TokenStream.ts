@@ -38,9 +38,9 @@ export default class TokenStream {
 		return this.tokens[this.current].test(type, value);
 	}
 
-	lookAhead(number: number = 1): Token {
-		if (this.tokens[this.current + number]) {
-			return this.tokens[this.current + number];
+	lookAhead(tokenNumber: number = 1): Token {
+		if (this.tokens[this.current + tokenNumber]) {
+			return this.tokens[this.current + tokenNumber];
 		} else {
 			throw new Error('Unexpected end of stream');
 		}

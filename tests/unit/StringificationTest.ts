@@ -81,6 +81,17 @@ const dataProvider = [
 		expectedString: 'limit(20,20)',
 		message: 'fourth query'
 	},
+	
+	{
+		queryObject: new Query({
+			query: new And([
+				new Ne('name', null),
+				new Ne('age', 'null()'),
+			])
+		}),
+		expectedString: 'and(ne(name,null()),ne(age,null()))',
+		message: 'with null()/ null'
+	},
 	{
 		queryObject: new Query({
 			select: new Select(['id', 'name', 'age']),

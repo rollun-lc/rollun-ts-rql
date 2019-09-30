@@ -105,7 +105,7 @@ export default class QueryStringifier {
 
 			case (node instanceof AbstractScalarNode):
 				const scalarNode = <AbstractScalarNode> node;
-				const type = (typeof scalarNode.value === 'string' ? 'string:' : '');
+				const type = (typeof scalarNode.value === 'string' && scalarNode.value !== 'null()'  ? 'string:' : '');
 				result = `${scalarNode.name}(${this.encodeRql(scalarNode.field)},${type}${this.encodeRql(scalarNode.value)})`;
 				break;
 

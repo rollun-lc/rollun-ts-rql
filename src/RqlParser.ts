@@ -47,11 +47,12 @@ import MatchNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/
 import FiqlEqnNodeParser from './parser/nodeParsers/query/binaryOperator/fiql/FiqlEqnNodeParser';
 import FiqlEqfNodeParser from './parser/nodeParsers/query/binaryOperator/fiql/FiqlEqfNodeParser';
 import FiqlIeNodeParser from './parser/nodeParsers/query/binaryOperator/fiql/FiqlIeNodeParser';
-import FiqlMatchNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlMatchNodeParser';
-import FiqlEqtNodeParser from './parser/nodeParsers/query/binaryOperator/fiql/FiqlEqtNodeParser';
+import FiqlMatchNodeParser     from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlMatchNodeParser';
+import FiqlEqtNodeParser       from './parser/nodeParsers/query/binaryOperator/fiql/FiqlEqtNodeParser';
 import FiqlAlikeGlobNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlAlikeGlobNodeParser';
-import FiqlContainsNodeParser from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlContainsNodeParser';
-import LikeGlobNodeParser from './parser/nodeParsers/query/comparisonOperators/rql/LikeGlobNodeParser';
+import FiqlContainsNodeParser  from './parser/nodeParsers/query/comparisonOperators/fiql/FiqlContainsNodeParser';
+import LikeGlobNodeParser      from './parser/nodeParsers/query/comparisonOperators/rql/LikeGlobNodeParser';
+import GroupbyNodeParser       from './parser/nodeParsers/GroupbyNodeParser';
 
 export default class RqlParser {
 	constructor(private allowedAggregateFunctions: string[] = ['count', 'max', 'min', 'sum', 'avg']) {
@@ -64,7 +65,6 @@ export default class RqlParser {
 		const lexer = new Lexer();
 		const tokens = lexer.tokenize(processedRql);
 		return parser.parse(tokens);
-
 	}
 
 	protected prepareRqlString(rql: string): string {
@@ -142,6 +142,7 @@ export default class RqlParser {
 				.addNodeParser(new AggregateSelectNodeParser(this.allowedAggregateFunctions))
 				.addNodeParser(new SortNodeParser(fieldParser))
 				.addNodeParser(new LimitNodeParser(integerParser))
+				.addNodeParser(new GroupbyNodeParser())
 		);
 	}
 

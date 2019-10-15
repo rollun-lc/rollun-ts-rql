@@ -1,7 +1,7 @@
 import { NodeParserInterface } from '../interfaces';
-import TokenStream from '../TokenStream';
-import { TokenTypeNameMap } from '../Token';
-import Groupby from '../../nodes/Groupby';
+import TokenStream             from '../TokenStream';
+import { TokenTypeNameMap }    from '../Token';
+import GroupBy                 from '../../nodes/GroupBy';
 
 export default class GroupbyNodeParser implements NodeParserInterface {
 	parse(tokenStream: TokenStream) {
@@ -15,7 +15,7 @@ export default class GroupbyNodeParser implements NodeParserInterface {
 			}
 		} while (true);
 		tokenStream.expect(TokenTypeNameMap.T_CLOSE_PARENTHESIS);
-		return new Groupby(fields);
+		return new GroupBy(fields);
 	}
 
 	supports(tokenStream: TokenStream) {

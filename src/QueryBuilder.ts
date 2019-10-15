@@ -1,11 +1,12 @@
-import AbstractNode from './nodes/AbstractNode';
-import AbstractQueryNode from './nodes/AbstractQueryNode';
-import Query from './Query';
-import Limit from './nodes/Limit';
-import Sort from './nodes/Sort';
-import Select from './nodes/Select';
-import And from './nodes/logicalNodes/And';
+import AbstractNode        from './nodes/AbstractNode';
+import AbstractQueryNode   from './nodes/AbstractQueryNode';
+import Query               from './Query';
+import Limit               from './nodes/Limit';
+import Sort                from './nodes/Sort';
+import Select              from './nodes/Select';
+import And                 from './nodes/logicalNodes/And';
 import AbstractLogicalNode from './nodes/logicalNodes/AbstractLogicalNode';
+import GroupBy             from './nodes/GroupBy';
 
 export default class QueryBuilder {
 
@@ -27,6 +28,9 @@ export default class QueryBuilder {
 		}
 		if (node instanceof Limit) {
 			return this.addLimit(node);
+		}
+		if (node instanceof GroupBy) {
+			return this.addGroupBy(node);
 		}
 		throw new Error(`Unknown node "${node.name}"`, );
 	}
@@ -61,6 +65,11 @@ export default class QueryBuilder {
 
 	addLimit(limit: Limit) {
 		this.query.limitNode = limit;
+		return this;
+	}
+
+	addGroupBy(node: GroupBy) {
+		this.query.groupNode = node;
 		return this;
 	}
 }

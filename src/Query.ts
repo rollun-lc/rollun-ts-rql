@@ -1,7 +1,8 @@
-import Select from './nodes/Select';
-import Sort from './nodes/Sort';
-import Limit from './nodes/Limit';
+import Select            from './nodes/Select';
+import Sort              from './nodes/Sort';
+import Limit             from './nodes/Limit';
 import AbstractQueryNode from './nodes/AbstractQueryNode';
+import GroupBy           from './nodes/GroupBy';
 
 export default class Query {
 
@@ -9,14 +10,17 @@ export default class Query {
 	protected _sortNode;
 	protected _limitNode;
 	protected _queryNode;
+	protected _groupNode;
 
 	constructor(
 		props: {
 			select?: Select,
 			sort?: Sort,
 			limit?: Limit,
-			query?: AbstractQueryNode
+			query?: AbstractQueryNode,
+			group?: GroupBy
 		}) {
+		this._groupNode = props.group;
 		this._selectNode = props.select;
 		this._sortNode = props.sort;
 		this._limitNode = props.limit;
@@ -50,5 +54,13 @@ export default class Query {
 
 	set queryNode(value) {
 		this._queryNode = value;
+	}
+	get groupNode() {
+		return this._groupNode;
+	}
+
+	set groupNode(value) {
+		this._groupNode = value;
+
 	}
 }

@@ -1,7 +1,6 @@
 import { NodeParserInterface } from './interfaces';
 import SortNodeParser from './nodeParsers/SortNodeParser';
 import AndNodeParser from './nodeParsers/query/logicalOperators/AndNodeParser';
-import GroupNodeParser from './nodeParsers/query/GroupNodeParser';
 import QueryNodeParser from './nodeParsers/QueryNodeParser';
 import SelectNodeParser from './nodeParsers/SelectNodeParser';
 import NotNodeParser from './nodeParsers/query/logicalOperators/NotNodeParser';
@@ -32,13 +31,15 @@ import FiqlOutNodeParser from './nodeParsers/query/comparisonOperators/fiql/Fiql
 import FiqlEqNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlEqNodeParser';
 import FiqlNeNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlNeNodeParser';
 import FiqlLtNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlLtNodeParser';
-import FiqlGtNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlGtNodeParser';
-import FiqlLeNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlLeNodeParser';
+import FiqlGtNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlGtNodeParser';
+import FiqlLeNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlLeNodeParser';
 import FiqlLikeNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlLikeNodeParser';
-import FiqlGeNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlGeNodeParser';
-import QueryBuilder from '../QueryBuilder';
-import Query from '../Query';
-import GlobParser from './valueParsers/GlobParser ';
+import FiqlGeNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlGeNodeParser';
+import QueryBuilder       from '../QueryBuilder';
+import Query              from '../Query';
+import GlobParser         from './valueParsers/GlobParser ';
+import GroupbyNodeParser  from './nodeParsers/GroupbyNodeParser';
+import GroupNodeParser    from './nodeParsers/query/GroupNodeParser';
 
 export default class Parser {
 
@@ -95,7 +96,8 @@ export default class Parser {
 			.addNodeParser(queryNodeParser)
 			.addNodeParser(new SelectNodeParser(fieldParser))
 			.addNodeParser(new SortNodeParser(fieldParser))
-			.addNodeParser(new LimitNodeParser(integerParser));
+			.addNodeParser(new LimitNodeParser(integerParser))
+			.addNodeParser(new GroupbyNodeParser());
 	}
 
 	parse(tokenStream: TokenStream): Query {

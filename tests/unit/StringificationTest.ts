@@ -7,16 +7,17 @@ import Limit from '../../src/nodes/Limit';
 import In from '../../src/nodes/arrayNodes/In';
 import Out from '../../src/nodes/arrayNodes/Out';
 import And from '../../src/nodes/logicalNodes/And';
-import Or from '../../src/nodes/logicalNodes/Or';
-import Not from '../../src/nodes/logicalNodes/Not';
-import Alike from '../../src/nodes/scalarNodes/Alike';
-import Eq from '../../src/nodes/scalarNodes/Eq';
-import Ge from '../../src/nodes/scalarNodes/Ge';
-import Gt from '../../src/nodes/scalarNodes/Gt';
-import Le from '../../src/nodes/scalarNodes/Le';
-import Like from '../../src/nodes/scalarNodes/Like';
-import Lt from '../../src/nodes/scalarNodes/Lt';
-import Ne from '../../src/nodes/scalarNodes/Ne';
+import Or                    from '../../src/nodes/logicalNodes/Or';
+import Not                   from '../../src/nodes/logicalNodes/Not';
+import Alike                 from '../../src/nodes/scalarNodes/Alike';
+import Eq                    from '../../src/nodes/scalarNodes/Eq';
+import Ge                    from '../../src/nodes/scalarNodes/Ge';
+import Gt                    from '../../src/nodes/scalarNodes/Gt';
+import Le                    from '../../src/nodes/scalarNodes/Le';
+import Like                  from '../../src/nodes/scalarNodes/Like';
+import Lt                    from '../../src/nodes/scalarNodes/Lt';
+import Ne                    from '../../src/nodes/scalarNodes/Ne';
+import GroupBy               from '../../src/nodes/GroupBy';
 import AggregateFunctionNode from '../../src/nodes/aggregateNodes/AggregateFunctionNode';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
@@ -179,13 +180,21 @@ const dataProvider = [
 		}),
 		expectedString: 'select(id,name,age)&or(like(name,string:123),like(name,123),like(id,string:1123532144),like(id,1123532144))',
 		message: 'type annotation check query'
+	},
+	{
+		queryObject: new Query({
+			group: new GroupBy(['id', 'age'])
+		}),
+		expectedString: 'groupby(id,age)',
+		message: 'GroupBy Node test'
 	}
 ];
 
 suite('Stringification', () => {
-	test('query to string', () => {
-		dataProvider.forEach((entry) => {
+	const testsAmount = dataProvider.length;
+		dataProvider.forEach((entry, index) => {
 			const {queryObject, expectedString, message} = entry;
+			test(`Test ${index + 1} of ${testsAmount}`, () => {
 			const actualString = QueryStringifier.stringify(queryObject);
 			assert.equal(actualString, expectedString, message);
 		});

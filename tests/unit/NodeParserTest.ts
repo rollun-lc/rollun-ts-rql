@@ -9,17 +9,18 @@ import Ne from '../../src/nodes/scalarNodes/Ne';
 import Lt from '../../src/nodes/scalarNodes/Lt';
 import Gt from '../../src/nodes/scalarNodes/Gt';
 import Le from '../../src/nodes/scalarNodes/Le';
-import Ge from '../../src/nodes/scalarNodes/Ge';
-import Like from '../../src/nodes/scalarNodes/Like';
-import Glob from '../../src/parser/Glob';
-import In from '../../src/nodes/arrayNodes/In';
-import Out from '../../src/nodes/arrayNodes/Out';
-import And from '../../src/nodes/logicalNodes/And';
-import Sort from '../../src/nodes/Sort';
-import Select from '../../src/nodes/Select';
-import Limit from '../../src/nodes/Limit';
-import Or from '../../src/nodes/logicalNodes/Or';
-import Not from '../../src/nodes/logicalNodes/Not';
+import Ge      from '../../src/nodes/scalarNodes/Ge';
+import Like    from '../../src/nodes/scalarNodes/Like';
+import Glob    from '../../src/parser/Glob';
+import In      from '../../src/nodes/arrayNodes/In';
+import Out     from '../../src/nodes/arrayNodes/Out';
+import And     from '../../src/nodes/logicalNodes/And';
+import Sort    from '../../src/nodes/Sort';
+import Select  from '../../src/nodes/Select';
+import Limit   from '../../src/nodes/Limit';
+import Or      from '../../src/nodes/logicalNodes/Or';
+import Not     from '../../src/nodes/logicalNodes/Not';
+import GroupBy from '../../src/nodes/GroupBy';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');
@@ -330,12 +331,17 @@ const dataForParsingTest = {
 			]))
 			.getQuery(),
 	],
+	'groupBy Node': [
+		'groupby(id,age)',
+		(new QueryBuilder())
+			.addGroupBy(new GroupBy(['id', 'age']))
+			.getQuery()
+	]
 };
 suite('Parser Test', () => {
-	test('Test parsing', () => {
 			const testQty = Object.keys(dataForParsingTest).length;
 			Object.values(dataForParsingTest).forEach((testData: any[], index) => {
-					console.log(`Parsing test ${index + 1} of ${testQty}`);
+				test(`Parsing test ${index + 1} of ${testQty}`, () => {
 					const [rql, result] = testData;
 					testParsing(rql, result, index + 1);
 				}

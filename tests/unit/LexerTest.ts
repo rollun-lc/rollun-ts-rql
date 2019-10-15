@@ -1,5 +1,5 @@
 import intern from 'intern';
-import Token, { TokenTypeNameMap } from '../../src/parser/Token';
+import { TokenTypeNameMap } from '../../src/parser/Token';
 import Lexer from '../../src/parser/Lexer';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
@@ -645,10 +645,9 @@ const dataForSyntaxErrorTest = {
 	]
 };
 suite('Lexer Test', () => {
-	test('Test tokenization', () => {
 			const testQty = Object.keys(dataForTokenizationTest).length;
 			Object.values(dataForTokenizationTest).forEach((testData: any[], index) => {
-					console.log(`Tokenization test ${index + 1} of ${testQty}`);
+				test(`Tokenization test ${index + 1} of ${testQty}`, () => {
 					const [rql, result] = testData;
 					testTokenization(rql, result, index + 1);
 				}

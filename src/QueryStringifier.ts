@@ -1,12 +1,13 @@
-import Query from './Query';
-import Select from './nodes/Select';
-import Limit from './nodes/Limit';
-import Sort from './nodes/Sort';
-import AbstractNode from './nodes/AbstractNode';
-import AbstractLogicalNode from './nodes/logicalNodes/AbstractLogicalNode';
-import AbstractArrayNode from './nodes/arrayNodes/AbstractArrayNode';
-import AbstractScalarNode from './nodes/scalarNodes/AbstractScalarNode';
+import Query                 from './Query';
+import Select                from './nodes/Select';
+import Limit                 from './nodes/Limit';
+import Sort                  from './nodes/Sort';
+import AbstractNode          from './nodes/AbstractNode';
+import AbstractLogicalNode   from './nodes/logicalNodes/AbstractLogicalNode';
+import AbstractArrayNode     from './nodes/arrayNodes/AbstractArrayNode';
+import AbstractScalarNode    from './nodes/scalarNodes/AbstractScalarNode';
 import AggregateFunctionNode from './nodes/aggregateNodes/AggregateFunctionNode';
+import GroupBy               from './nodes/GroupBy';
 
 export default class QueryStringifier {
 	static stringify(query: Query): string {
@@ -46,7 +47,21 @@ export default class QueryStringifier {
 			cleanKey = key.slice(1);
 		}
 		const methodName = `parse${cleanKey[0].toUpperCase()}${cleanKey.slice(1)}`;
-		return this[methodName](node);
+		const handler = this[methodName];
+		if (handler) {
+			return this[methodName](node);
+		} else {
+			throw new Error(`Node parser with name "${methodName}" is not a function!`);
+		}
+	}
+
+	protected static parseGroupNode(node?: GroupBy): string {
+		if (!node) { return ''; }
+		const fieldsAmount = node.fields.length;
+		const nodeArguments = node.fields.map((field, index) => {
+			return this.encodeRql(field) + (index + 1 < fieldsAmount ? ',' : '');
+		});
+		return `groupby(${nodeArguments.join('')})`;
 	}
 
 	protected static parseSelectNode(node?: Select): string {

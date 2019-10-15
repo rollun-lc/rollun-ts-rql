@@ -7,6 +7,7 @@
     "fix-style": "node_modules/.bin/tslint --fix --project ./tslint.json",
     "build": "node_modules/.bin/tsc",
     "run-tests": "node_modules/.bin/intern",
+    "run-rql-group-by-test": "node_modules/.bin/intern suites=tests/unit/GroupByNodeTest.ts",
     "run-rql-parser-test": "node_modules/.bin/intern suites=tests/unit/RqlParserTest.ts",
     "test": "npm run build && npm run run-tests"
   },

@@ -27,6 +27,7 @@ publish:
   only:
   - tags
   stage: deploy
+  when: manual
   script:
   - npm run build
   - apt-get update

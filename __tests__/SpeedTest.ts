@@ -1,15 +1,13 @@
-import intern           from 'intern';
-import QueryStringifier from '../../dist/QueryStringifier';
-import Query            from '../../dist/Query';
-import Select           from '../../dist/nodes/Select';
-import Limit            from '../../dist/nodes/Limit';
-import Eq               from '../../dist/nodes/scalarNodes/Eq';
-import Sort             from '../../dist/nodes/Sort';
-import RqlParser        from '../../dist/RqlParser';
+import QueryStringifier from '../dist/QueryStringifier';
+import Query            from '../dist/Query';
+import Select           from '../dist/nodes/Select';
+import Limit            from '../dist/nodes/Limit';
+import Eq               from '../dist/nodes/scalarNodes/Eq';
+import Sort             from '../dist/nodes/Sort';
+import RqlParser        from '../dist/RqlParser';
 
-const {suite, test} = intern.getPlugin('interface.tdd');
 
-suite('Speed test', () => {
+describe('Speed test', () => {
 	let stringsToParse = [];
 	for (let i = 0; i < 1000; i++) {
 		const rql = QueryStringifier.stringify(new Query({

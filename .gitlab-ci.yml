@@ -1,11 +1,12 @@
 image: node:latest
+
 stages:
 - analyse
 - test
 - deploy
 
 before_script:
-- npm i
+- rm -rf node_modules && npm i
 
 run_tslint:
   stage: analyse

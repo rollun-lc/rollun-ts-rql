@@ -5,6 +5,8 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "lib": [
       "dom",
       "es5",
@@ -18,13 +20,15 @@
       "esnext"
     ]
   },
+  "types": [],
   "exclude": [
-    "node_modules",
+    "node_modules/*",
+    "node_modules/@types/*",
     "dist/*",
-    "misc-stuff"
+    "misc-stuff",
+    "__tests__/*"
   ],
   "include": [
-    "src/**/*",
-    "test/**/*"
+    "src/**/*"
   ]
 }

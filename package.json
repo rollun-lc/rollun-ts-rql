@@ -5,15 +5,15 @@
   "scripts": {
     "analyse": "node_modules/.bin/tslint --project ./tslint.json -e **/tests/**",
     "fix-style": "node_modules/.bin/tslint --fix --project ./tslint.json",
-    "build": "node_modules/.bin/tsc",
-    "run-tests": "node_modules/.bin/intern",
+    "build": "node_modules/.bin/tsc && babel src --out-dir dist --extensions '.ts,.tsx'",
+    "run-tests": "npm run build && node_modules/.bin/intern",
     "run-rql-group-by-test": "node_modules/.bin/intern suites=tests/unit/GroupByNodeTest.ts",
     "run-rql-parser-test": "node_modules/.bin/intern suites=tests/unit/RqlParserTest.ts",
     "test": "npm run build && npm run run-tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bryakwork/rollun-ts-rql.git"
+    "url": "git+https://github.com/rollun-com/rollun-ts-rql.git"
   },
   "keywords": [
     "rql",
@@ -23,10 +23,15 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bryakwork/rollun-ts-rql/issues"
+    "url": "https://github.com/rollun-com/rollun-ts-rql/issues"
   },
-  "homepage": "https://github.com/bryakwork/rollun-ts-rql#readme",
+  "homepage": "https://github.com/rollun-com/rollun-ts-rql#readme",
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-typescript": "^7.7.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "intern": "^4.3.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.12.0",

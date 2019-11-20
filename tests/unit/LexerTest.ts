@@ -1,6 +1,6 @@
 import intern from 'intern';
-import { TokenTypeNameMap } from '../../src/parser/Token';
-import Lexer from '../../src/parser/Lexer';
+import { TokenTypeNameMap } from '../../dist/parser/Token';
+import Lexer from '../../dist/parser/Lexer';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');

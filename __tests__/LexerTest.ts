@@ -1,9 +1,5 @@
-import intern from 'intern';
-import { TokenTypeNameMap } from '../../dist/parser/Token';
-import Lexer from '../../dist/parser/Lexer';
-
-const {suite, test} = intern.getPlugin('interface.tdd');
-const {assert} = intern.getPlugin('chai');
+import { TokenTypeNameMap } from '../dist/parser/Token';
+import Lexer                from '../dist/parser/Lexer';
 
 function encodeString(value: string) {
 	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/, 'g'), (value: string) => {
@@ -23,13 +19,12 @@ function encodeString(value: string) {
 function testTokenization(rql: string, expected: [string, string][], testNumber: number) {
 	const lexer = new Lexer();
 	const stream = lexer.tokenize(rql);
-	assert.equal(stream.length, expected.length + 1, `different stream length, test #${testNumber}`);
-
+	expect(stream.length).toEqual(expected.length + 1);
 	expected.forEach((token: [string, string]) => {
 		const [value, type] = token;
 		const currentStreamToken = stream.getCurrent();
-		assert.equal(value, currentStreamToken.value, `value ${value} !== ${currentStreamToken.value}, test #${testNumber}`);
-		assert.equal(type, currentStreamToken.type, `type ${type} !== ${currentStreamToken.type}, test #${testNumber}`);
+		expect(value).toEqual(currentStreamToken.value);
+		expect(type).toEqual(currentStreamToken.type);
 		stream.next();
 	});
 }
@@ -39,7 +34,7 @@ function testSyntaxError(rql: string, errorMessage: string) {
 		const lexer = new Lexer();
 		lexer.tokenize(rql);
 	} catch (error) {
-		assert.equal(error.message, errorMessage);
+		expect(error.message).toEqual(errorMessage);
 	}
 }
 
@@ -644,10 +639,10 @@ const dataForSyntaxErrorTest = {
 		'Unexpected token "1" (T_INTEGER) at position 0'
 	]
 };
-suite('Lexer Test', () => {
-			const testQty = Object.keys(dataForTokenizationTest).length;
-			Object.values(dataForTokenizationTest).forEach((testData: any[], index) => {
-				test(`Tokenization test ${index + 1} of ${testQty}`, () => {
+describe('Lexer Test', () => {
+	const testQty = Object.keys(dataForTokenizationTest).length;
+	Object.values(dataForTokenizationTest).forEach((testData: any[], index) => {
+			test(`Tokenization test ${index + 1} of ${testQty}`, () => {
 					const [rql, result] = testData;
 					testTokenization(rql, result, index + 1);
 				}

@@ -1,27 +1,24 @@
-import intern from 'intern';
-import QueryStringifier from '../../dist/QueryStringifier';
-import Query from '../../dist/Query';
-import Select from '../../dist/nodes/Select';
-import Sort from '../../dist/nodes/Sort';
-import Limit from '../../dist/nodes/Limit';
-import In from '../../dist/nodes/arrayNodes/In';
-import Out from '../../dist/nodes/arrayNodes/Out';
-import And from '../../dist/nodes/logicalNodes/And';
-import Or                    from '../../dist/nodes/logicalNodes/Or';
-import Not                   from '../../dist/nodes/logicalNodes/Not';
-import Alike                 from '../../dist/nodes/scalarNodes/Alike';
-import Eq                    from '../../dist/nodes/scalarNodes/Eq';
-import Ge                    from '../../dist/nodes/scalarNodes/Ge';
-import Gt                    from '../../dist/nodes/scalarNodes/Gt';
-import Le                    from '../../dist/nodes/scalarNodes/Le';
-import Like                  from '../../dist/nodes/scalarNodes/Like';
-import Lt                    from '../../dist/nodes/scalarNodes/Lt';
-import Ne                    from '../../dist/nodes/scalarNodes/Ne';
-import GroupBy               from '../../dist/nodes/GroupBy';
-import AggregateFunctionNode from '../../dist/nodes/aggregateNodes/AggregateFunctionNode';
 
-const {suite, test} = intern.getPlugin('interface.tdd');
-const {assert} = intern.getPlugin('chai');
+import QueryStringifier      from '../dist/QueryStringifier';
+import Query                 from '../dist/Query';
+import Select                from '../dist/nodes/Select';
+import Sort                  from '../dist/nodes/Sort';
+import Limit                 from '../dist/nodes/Limit';
+import In                    from '../dist/nodes/arrayNodes/In';
+import Out                   from '../dist/nodes/arrayNodes/Out';
+import And                   from '../dist/nodes/logicalNodes/And';
+import Or                    from '../dist/nodes/logicalNodes/Or';
+import Not                   from '../dist/nodes/logicalNodes/Not';
+import Alike                 from '../dist/nodes/scalarNodes/Alike';
+import Eq                    from '../dist/nodes/scalarNodes/Eq';
+import Ge                    from '../dist/nodes/scalarNodes/Ge';
+import Gt                    from '../dist/nodes/scalarNodes/Gt';
+import Le                    from '../dist/nodes/scalarNodes/Le';
+import Like                  from '../dist/nodes/scalarNodes/Like';
+import Lt                    from '../dist/nodes/scalarNodes/Lt';
+import Ne                    from '../dist/nodes/scalarNodes/Ne';
+import GroupBy               from '../dist/nodes/GroupBy';
+import AggregateFunctionNode from '../dist/nodes/aggregateNodes/AggregateFunctionNode';
 
 const dataProvider = [
 	{
@@ -82,7 +79,7 @@ const dataProvider = [
 		expectedString: 'limit(20,20)',
 		message: 'fourth query'
 	},
-	
+
 	{
 		queryObject: new Query({
 			query: new And([
@@ -159,10 +156,10 @@ const dataProvider = [
 	{
 		queryObject: new Query({
 			select: new Select([
-					new AggregateFunctionNode('count', 'age'),
-					new AggregateFunctionNode('min', 'age'),
-					new AggregateFunctionNode('max', 'age'),
-					new AggregateFunctionNode('avg', 'age')
+				new AggregateFunctionNode('count', 'age'),
+				new AggregateFunctionNode('min', 'age'),
+				new AggregateFunctionNode('max', 'age'),
+				new AggregateFunctionNode('avg', 'age')
 			])
 		}),
 		expectedString: 'select(count(age),min(age),max(age),avg(age))',
@@ -190,13 +187,13 @@ const dataProvider = [
 	}
 ];
 
-suite('Stringification', () => {
+describe('Stringification', () => {
 	const testsAmount = dataProvider.length;
-		dataProvider.forEach((entry, index) => {
-			const {queryObject, expectedString, message} = entry;
-			test(`Test ${index + 1} of ${testsAmount}`, () => {
+	dataProvider.forEach((entry, index) => {
+		const {queryObject, expectedString, message} = entry;
+		test(`Test ${index + 1} of ${testsAmount}, ${message}`, () => {
 			const actualString = QueryStringifier.stringify(queryObject);
-			assert.equal(actualString, expectedString, message);
+			expect(actualString).toEqual(expectedString);
 		});
 	});
 });

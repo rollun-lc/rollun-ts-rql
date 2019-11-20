@@ -1,7 +1,6 @@
 import { SubParserInterface, TypeCasterInterface } from '../interfaces';
 import TokenStream from '../TokenStream';
 import Token, { TokenTypeNameMap } from '../Token';
-import { type } from 'os';
 
 export default class ScalarParser implements SubParserInterface {
 	/**

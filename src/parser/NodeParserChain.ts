@@ -16,7 +16,6 @@ export default class NodeParserChain implements NodeParserInterface {
 				return nodeParser.parse(tokenStream);
 			}
 		}
-		console.log('node parsers', tokenStream, (new GroupbyNodeParser()));
 		throw new SyntaxError(
 			`Unexpected token "${tokenStream.getCurrent().value}" (${tokenStream.getCurrent().name}) at position ${tokenStream.getCurrent().start}`
 		);

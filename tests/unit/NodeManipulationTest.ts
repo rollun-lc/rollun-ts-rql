@@ -1,7 +1,7 @@
 import intern from 'intern';
-import In from '../../src/nodes/arrayNodes/In';
-import Or from '../../src/nodes/logicalNodes/Or';
-import Eq from '../../src/nodes/scalarNodes/Eq';
+import In from '../../dist/nodes/arrayNodes/In';
+import Or from '../../dist/nodes/logicalNodes/Or';
+import Eq from '../../dist/nodes/scalarNodes/Eq';
 
 const {suite, test} = intern.getPlugin('interface.tdd');
 const {assert} = intern.getPlugin('chai');

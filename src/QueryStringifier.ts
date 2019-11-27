@@ -69,7 +69,7 @@ export default class QueryStringifier {
 			const encodedFieldNames =
 				node.fields.map((fieldName) => {
 						if (fieldName instanceof AggregateFunctionNode) {
-							return `${this.encodeRql(fieldName.function)}(${this.encodeRql(fieldName.field)})`;
+							return `${this.encodeRql(fieldName.function)}(${this.encodeRql(fieldName.field.toString())})`;
 						} else {
 							return this.encodeRql(fieldName);
 						}

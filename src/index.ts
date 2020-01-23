@@ -52,3 +52,10 @@ export { default as Sort }    from './nodes/Sort';
 export { default as Select }  from './nodes/Select';
 export { default as Limit }   from './nodes/Limit';
 export { default as GroupBy } from './nodes/GroupBy';
+
+// Abstract nodes
+
+export { default as AbstractNode }       from './nodes/AbstractNode';
+export { default as AbstractQueryNode }  from './nodes/AbstractQueryNode';
+export { default as AbstractScalarNode } from './nodes/scalarNodes/AbstractScalarNode';
+export { default as AbstractArrayNode }  from './nodes/arrayNodes/AbstractArrayNode';

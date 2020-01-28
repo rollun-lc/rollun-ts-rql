@@ -8,7 +8,6 @@ import AbstractArrayNode     from './nodes/arrayNodes/AbstractArrayNode';
 import AbstractScalarNode    from './nodes/scalarNodes/AbstractScalarNode';
 import AggregateFunctionNode from './nodes/aggregateNodes/AggregateFunctionNode';
 import GroupBy               from './nodes/GroupBy';
-import Glob                  from "./parser/Glob";
 
 export default class QueryStringifier {
 	static stringify(query: Query): string {

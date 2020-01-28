@@ -1,7 +1,10 @@
 import * as locutus from 'locutus';
 
 export default class Glob {
-	constructor(private glob: string) {
+	private readonly glob: string;
+
+	constructor(glob: string) {
+		this.glob = glob;
 	}
 
 	static encode(value: string): string {

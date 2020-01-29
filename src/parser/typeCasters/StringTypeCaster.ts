@@ -18,7 +18,8 @@ export default class StringTypeCaster implements TypeCasterInterface {
 		if (token.test(TokenTypeNameMap.T_GLOB)) {
 			return encodeURIComponent(token.value);
 		} else {
-			return token.value;
+			// enforce string type.
+			return `${token.value}`;
 		}
 	}
 }

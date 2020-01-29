@@ -8,11 +8,7 @@ import AbstractArrayNode     from './nodes/arrayNodes/AbstractArrayNode';
 import AbstractScalarNode    from './nodes/scalarNodes/AbstractScalarNode';
 import AggregateFunctionNode from './nodes/aggregateNodes/AggregateFunctionNode';
 import GroupBy               from './nodes/GroupBy';
-import Like                  from './nodes/scalarNodes/Like';
-import Alike                 from './nodes/scalarNodes/Alike';
-import LikeGlob              from './nodes/scalarNodes/LikeGlob';
-import AlikeGlob             from './nodes/scalarNodes/AlikeGlob';
-import Contains              from './nodes/scalarNodes/Contains';
+import Glob                  from './parser/Glob';
 
 export default class QueryStringifier {
 	static stringify(query: Query): string {
@@ -125,10 +121,11 @@ export default class QueryStringifier {
 
 			case (node instanceof AbstractScalarNode):
 				const scalarNode = <AbstractScalarNode> node;
-				const type = (!this.isGlob(scalarNode) && typeof scalarNode.value === 'string' && scalarNode.value !== 'null()'  ? 'string:' : '');
-				const value = (scalarNode.value === null || scalarNode.value === 'null()'
+				const nodeValue = scalarNode.value instanceof Glob ? scalarNode.value.toString() : scalarNode.value;
+				const type = (typeof nodeValue === 'string' && nodeValue !== 'null()'  ? 'string:' : '');
+				const value = (nodeValue === null || nodeValue === 'null()'
 					? 'null()'
-					: this.encodeRql(scalarNode.value));
+					: this.encodeRql(nodeValue));
 				result = `${scalarNode.name}(${this.encodeRql(scalarNode.field)},${type}${value})`;
 				break;
 
@@ -141,17 +138,6 @@ export default class QueryStringifier {
 				break;
 		}
 		return result;
-	}
-
-	// for nodes listed in this function, stringifier doesn't need to add
-	// 'string' type annotation, and value in node is not always Glob
-	// in case of this nodes.
-	protected static isGlob(node: AbstractScalarNode) {
-		return node instanceof Like ||
-			node instanceof Alike ||
-			node instanceof LikeGlob ||
-			node instanceof AlikeGlob ||
-			node instanceof Contains;
 	}
 
 	protected static addUnion(queryString: string): string {

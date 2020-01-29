@@ -21,7 +21,7 @@ export default class GlobParser implements SubParserInterface {
 		if (tokenStream.test(TokenTypeNameMap.T_GLOB)) {
 			return new Glob(tokenStream.next().value);
 		}
-		if (tokenStream.nextIf(TokenTypeNameMap.T_TYPE, 'glob')) {
+		if (tokenStream.nextIf(TokenTypeNameMap.T_TYPE)) {
 			tokenStream.expect(TokenTypeNameMap.T_COLON);
 		}
 		return new Glob(Glob.encode(tokenStream.expect(GlobParser.allowedTypes).value));

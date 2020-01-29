@@ -1,6 +1,6 @@
 import AbstractComparisonOperatorNodeParser from '../AbstractComparisonOperatorNodeParser';
-import TokenStream from '../../../../TokenStream';
-import { TokenTypeNameMap } from '../../../../Token';
+import TokenStream                          from '../../../../TokenStream';
+import { TokenTypeNameMap }                 from '../../../../Token';
 
 export default abstract class AbstractComparisonRqlNodeParser extends AbstractComparisonOperatorNodeParser {
 

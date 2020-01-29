@@ -1,7 +1,7 @@
 import { SubParserInterface } from '../interfaces';
-import { TokenTypeNameMap } from '../Token';
-import TokenStream from '../TokenStream';
-import Glob from '../Glob';
+import { TokenTypeNameMap }   from '../Token';
+import TokenStream            from '../TokenStream';
+import Glob                   from '../Glob';
 
 export default class GlobParser implements SubParserInterface {
 	/**

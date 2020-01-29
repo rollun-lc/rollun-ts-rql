@@ -56,7 +56,7 @@ const dataProvider = [
 			]),
 			limit: new Limit(13, 100)
 		}),
-		expectedString: 'select(id,name,age)&limit(13,100)&and(and(in(name,(Alfred,Ivan,Jared)),out(id,(12335,16725))),or(like(name,er),alike(name,aZa)))',
+		expectedString: 'select(id,name,age)&limit(13,100)&and(and(in(name,(Alfred,Ivan,Jared)),out(id,(12335,16725))),or(like(name,string:er),alike(name,string:aZa)))',
 		message: 'second query'
 	},
 	{
@@ -132,7 +132,7 @@ const dataProvider = [
 				new Like('name', '!')
 			])
 		}),
-		expectedString: 'select(id,name,age)&or(like(name,%28),like(name,%29),like(name,%2D),like(name,%5F),like(name,%2E),like(name,%7E),like(name,%2A),like(name,%27),like(name,%21))',
+		expectedString: 'select(id,name,age)&or(like(name,string:%28),like(name,string:%29),like(name,string:%2D),like(name,string:%5F),like(name,string:%2E),like(name,string:%7E),like(name,string:%2A),like(name,string:%27),like(name,string:%21))',
 		message: 'query with special characters'
 	},
 	{
@@ -150,7 +150,7 @@ const dataProvider = [
 				new Like('name', 'run!')
 			])
 		}),
-		expectedString: 'select(id,name,age)&or(like(name,%3D%28),like(name,%3D%29),like(name,%2A%2D%2A),like(name,T%5FT),like(name,0%2E0),like(name,%7Eqw),like(name,o%2Ao),like(name,ars%27),like(name,run%21))',
+		expectedString: 'select(id,name,age)&or(like(name,string:%3D%28),like(name,string:%3D%29),like(name,string:%2A%2D%2A),like(name,string:T%5FT),like(name,string:0%2E0),like(name,string:%7Eqw),like(name,string:o%2Ao),like(name,string:ars%27),like(name,string:run%21))',
 		message: 'query with words that contain special characters'
 	},
 	{
@@ -175,7 +175,7 @@ const dataProvider = [
 				new Like('id', 1123532144),
 			])
 		}),
-		expectedString: 'select(id,name,age)&or(like(name,123),like(name,123),like(id,1123532144),like(id,1123532144))',
+		expectedString: 'select(id,name,age)&or(like(name,string:123),like(name,123),like(id,string:1123532144),like(id,1123532144))',
 		message: 'type annotation check query'
 	},
 	{

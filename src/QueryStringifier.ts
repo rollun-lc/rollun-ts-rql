@@ -122,8 +122,8 @@ export default class QueryStringifier {
 			case (node instanceof AbstractScalarNode):
 				const scalarNode = <AbstractScalarNode> node;
 				const nodeValue = scalarNode.value instanceof Glob ? scalarNode.value.toString() : scalarNode.value;
-				const type = (typeof nodeValue === 'string' && nodeValue !== 'null()'  ? 'string:' : '');
-				const value = (nodeValue === null || nodeValue === 'null()'
+				const type = (typeof nodeValue === 'string' && nodeValue !== 'null()' && nodeValue !== ''  ? 'string:' : '');
+				const value = (nodeValue === '' || nodeValue === null || nodeValue === 'null()'
 					? 'null()'
 					: this.encodeRql(nodeValue));
 				result = `${scalarNode.name}(${this.encodeRql(scalarNode.field)},${type}${value})`;

@@ -17,12 +17,12 @@ or add
 to the dependencies section of your package.json
 ## Basic usage
 ```typescript
-import QueryStringifier from 'rollun-ts-rql/dist/QueryStringifier';
-import Query from 'rollun-ts-rql/dist/Query';
-import Select from 'rollun-ts-rql/dist/nodes/Select';
-import And from 'rollun-ts-rql/dist/nodes/logicalNodes/And';
-import Eq from 'rollun-ts-rql/dist/nodes/scalarNodes/Eq';
-import Ge from 'rollun-ts-rql/dist/nodes/scalarNodes/Ge';
+import QueryStringifier from 'rollun-ts-rql/dist';
+import Query from 'rollun-ts-rql/dist';
+import Select from 'rollun-ts-rql/dist';
+import And from 'rollun-ts-rql/dist';
+import Eq from 'rollun-ts-rql/dist';
+import Ge from 'rollun-ts-rql/dist';
 
 const query = new Query({
     select: new Select(['id', 'name', 'age', 'city']),

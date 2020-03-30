@@ -1,14 +1,15 @@
-import Query                 from './Query';
-import Select                from './nodes/Select';
-import Limit                 from './nodes/Limit';
-import Sort                  from './nodes/Sort';
-import AbstractNode          from './nodes/AbstractNode';
-import AbstractLogicalNode   from './nodes/logicalNodes/AbstractLogicalNode';
-import AbstractArrayNode     from './nodes/arrayNodes/AbstractArrayNode';
-import AbstractScalarNode    from './nodes/scalarNodes/AbstractScalarNode';
-import AggregateFunctionNode from './nodes/aggregateNodes/AggregateFunctionNode';
-import GroupBy               from './nodes/GroupBy';
-import Glob                  from './parser/Glob';
+import Query                      from './Query';
+import Select                     from './nodes/Select';
+import Limit                      from './nodes/Limit';
+import Sort                       from './nodes/Sort';
+import AbstractNode               from './nodes/AbstractNode';
+import AbstractLogicalNode        from './nodes/logicalNodes/AbstractLogicalNode';
+import AbstractArrayNode          from './nodes/arrayNodes/AbstractArrayNode';
+import AbstractScalarNode         from './nodes/scalarNodes/AbstractScalarNode';
+import AggregateFunctionNode      from './nodes/aggregateNodes/AggregateFunctionNode';
+import GroupBy                    from './nodes/GroupBy';
+import Glob                       from './parser/Glob';
+import AbstractBinaryOperatorNode from "./nodes/binaryNodes/AbstractBinaryNode";
 
 export default class QueryStringifier {
 	static stringify(query: Query): string {
@@ -108,7 +109,6 @@ export default class QueryStringifier {
 	protected static parseQueryNode(node?: AbstractNode): string {
 		let result = '';
 		switch (true) {
-
 			case (node instanceof AbstractLogicalNode):
 				const logicalNode = <AbstractLogicalNode> node;
 				const nodeName = logicalNode.name;
@@ -136,6 +136,10 @@ export default class QueryStringifier {
 				});
 				result = `${arrayNode.name}(${this.encodeRql(arrayNode.field)},(${encodedValues.join(',')}))`;
 				break;
+			case (node instanceof AbstractBinaryOperatorNode):
+				const binaryOperatorNode = <AbstractBinaryOperatorNode> node;
+				result = `${binaryOperatorNode.name}(${this.encodeRql(binaryOperatorNode.field)})`;
+				// console.log(node);
 		}
 		return result;
 	}

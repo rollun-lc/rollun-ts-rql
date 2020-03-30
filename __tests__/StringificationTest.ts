@@ -1,4 +1,3 @@
-
 import QueryStringifier      from '../dist/QueryStringifier';
 import Query                 from '../dist/Query';
 import Select                from '../dist/nodes/Select';
@@ -19,6 +18,7 @@ import Lt                    from '../dist/nodes/scalarNodes/Lt';
 import Ne                    from '../dist/nodes/scalarNodes/Ne';
 import GroupBy               from '../dist/nodes/GroupBy';
 import AggregateFunctionNode from '../dist/nodes/aggregateNodes/AggregateFunctionNode';
+import { Eqf, Eqn, Eqt, Ie } from "../dist";
 
 const dataProvider = [
 	{
@@ -184,6 +184,18 @@ const dataProvider = [
 		}),
 		expectedString: 'groupby(id,age)',
 		message: 'GroupBy Node test'
+	},
+	{
+		queryObject: new Query({
+			query: new Or([
+				new Eqn('field_1'),
+				new Eqt('field_2'),
+				new Eqf('field_3'),
+				new Ie('field_4')
+			])
+		}),
+		expectedString: 'or(eqn(field%5F1),eqt(field%5F2),eqf(field%5F3),ie(field%5F4))',
+		message: 'Binary nodes test'
 	}
 ];
 

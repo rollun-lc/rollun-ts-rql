@@ -29,8 +29,8 @@ import LikeNodeParser from './nodeParsers/query/comparisonOperators/rql/LikeNode
 import FiqlInNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlInNodeParser';
 import FiqlOutNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlOutNodeParser';
 import FiqlEqNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlEqNodeParser';
-import FiqlNeNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlNeNodeParser';
-import FiqlLtNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlLtNodeParser';
+import FiqlNeNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlNeNodeParser';
+import FiqlLtNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlLtNodeParser';
 import FiqlGtNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlGtNodeParser';
 import FiqlLeNodeParser   from './nodeParsers/query/comparisonOperators/fiql/FiqlLeNodeParser';
 import FiqlLikeNodeParser from './nodeParsers/query/comparisonOperators/fiql/FiqlLikeNodeParser';
@@ -40,6 +40,10 @@ import Query              from '../Query';
 import GlobParser         from './valueParsers/GlobParser ';
 import GroupbyNodeParser  from './nodeParsers/GroupbyNodeParser';
 import GroupNodeParser    from './nodeParsers/query/GroupNodeParser';
+import EqnNodeParser      from "./nodeParsers/query/binaryOperator/rql/EqnNodeParser";
+import EqfNodeParser      from "./nodeParsers/query/binaryOperator/rql/EqfNodeParser";
+import EqtNodeParser      from "./nodeParsers/query/binaryOperator/rql/EqtNodeParser ";
+import IeNodeParser       from "./nodeParsers/query/binaryOperator/rql/IeNodeParser";
 
 export default class Parser {
 
@@ -82,6 +86,10 @@ export default class Parser {
 			.addNodeParser(new GtNodeParser(fieldParser, scalarParser))
 			.addNodeParser(new LeNodeParser(fieldParser, scalarParser))
 			.addNodeParser(new GeNodeParser(fieldParser, scalarParser))
+			.addNodeParser(new EqnNodeParser())
+			.addNodeParser(new EqfNodeParser())
+			.addNodeParser(new EqtNodeParser())
+			.addNodeParser(new IeNodeParser())
 			.addNodeParser(new LikeNodeParser(fieldParser, globParser))
 			.addNodeParser(new FiqlInNodeParser(fieldParser, arrayParser))
 			.addNodeParser(new FiqlOutNodeParser(fieldParser, arrayParser))

@@ -68,7 +68,7 @@ export default class RqlParser {
 	}
 
 	protected prepareRqlString(rql: string): string {
-		const sortNodeRegexp = /sort\(([^\(\)\&]+)\)/;
+		const sortNodeRegexp = /sort\(([^()&]+)\)/;
 		const matches = rql.match(sortNodeRegexp);
 		if (matches) {
 			let sortNodeString = 'sort(';

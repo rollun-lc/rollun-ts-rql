@@ -1,15 +1,15 @@
-import Query                      from './Query';
-import Select                     from './nodes/Select';
-import Limit                      from './nodes/Limit';
-import Sort                       from './nodes/Sort';
-import AbstractNode               from './nodes/AbstractNode';
-import AbstractLogicalNode        from './nodes/logicalNodes/AbstractLogicalNode';
-import AbstractArrayNode          from './nodes/arrayNodes/AbstractArrayNode';
-import AbstractScalarNode         from './nodes/scalarNodes/AbstractScalarNode';
-import AggregateFunctionNode      from './nodes/aggregateNodes/AggregateFunctionNode';
-import GroupBy                    from './nodes/GroupBy';
-import Glob                       from './parser/Glob';
-import AbstractBinaryOperatorNode from "./nodes/binaryNodes/AbstractBinaryNode";
+import Query                 from './Query';
+import Select                from './nodes/Select';
+import Limit                 from './nodes/Limit';
+import Sort                  from './nodes/Sort';
+import AbstractNode          from './nodes/AbstractNode';
+import AbstractLogicalNode   from './nodes/logicalNodes/AbstractLogicalNode';
+import AbstractArrayNode     from './nodes/arrayNodes/AbstractArrayNode';
+import AbstractScalarNode    from './nodes/scalarNodes/AbstractScalarNode';
+import AggregateFunctionNode from './nodes/aggregateNodes/AggregateFunctionNode';
+import GroupBy               from './nodes/GroupBy';
+import Glob                  from './parser/Glob';
+import AbstractBinaryNode    from './nodes/binaryNodes/AbstractBinaryNode';
 
 export default class QueryStringifier {
 	static stringify(query: Query): string {
@@ -45,7 +45,7 @@ export default class QueryStringifier {
 
 	protected static parseTopLevelNode(key: string, node: AbstractNode) {
 		let cleanKey = key;
-		if (cleanKey[0] === '_' ) { // remove underscore to enable protected and private methods usage
+		if (cleanKey[0] === '_') { // remove underscore to enable protected and private methods usage
 			cleanKey = key.slice(1);
 		}
 		const methodName = `parse${cleanKey[0].toUpperCase()}${cleanKey.slice(1)}`;
@@ -58,7 +58,9 @@ export default class QueryStringifier {
 	}
 
 	protected static parseGroupNode(node?: GroupBy): string {
-		if (!node) { return ''; }
+		if (!node) {
+			return '';
+		}
 		const fieldsAmount = node.fields.length;
 		const nodeArguments = node.fields.map((field, index) => {
 			return this.encodeRql(field) + (index + 1 < fieldsAmount ? ',' : '');
@@ -95,8 +97,7 @@ export default class QueryStringifier {
 				result = result.substring(0, result.length - 1);
 			}
 			result += ')';
-		}
-		else {
+		} else {
 			result = '';
 		}
 		return result;
@@ -122,7 +123,7 @@ export default class QueryStringifier {
 			case (node instanceof AbstractScalarNode):
 				const scalarNode = <AbstractScalarNode> node;
 				const nodeValue = scalarNode.value instanceof Glob ? scalarNode.value.toString() : scalarNode.value;
-				const type = (typeof nodeValue === 'string' && nodeValue !== 'null()' && nodeValue !== ''  ? 'string:' : '');
+				const type = (typeof nodeValue === 'string' && nodeValue !== 'null()' && nodeValue !== '' ? 'string:' : '');
 				const value = (nodeValue === '' || nodeValue === null || nodeValue === 'null()'
 					? 'null()'
 					: this.encodeRql(nodeValue));
@@ -136,10 +137,10 @@ export default class QueryStringifier {
 				});
 				result = `${arrayNode.name}(${this.encodeRql(arrayNode.field)},(${encodedValues.join(',')}))`;
 				break;
-			case (node instanceof AbstractBinaryOperatorNode):
-				const binaryOperatorNode = <AbstractBinaryOperatorNode> node;
+			case (node instanceof AbstractBinaryNode):
+				const binaryOperatorNode = <AbstractBinaryNode> node;
 				result = `${binaryOperatorNode.name}(${this.encodeRql(binaryOperatorNode.field)})`;
-				// console.log(node);
+				break;
 		}
 		return result;
 	}

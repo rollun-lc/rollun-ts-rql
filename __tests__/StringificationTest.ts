@@ -196,6 +196,14 @@ const dataProvider = [
 		}),
 		expectedString: 'or(eqn(field%5F1),eqt(field%5F2),eqf(field%5F3),ie(field%5F4))',
 		message: 'Binary nodes test'
+	},
+	{
+		queryObject: new Query({
+			query: new Eqn('field_1'),
+			limit: new Limit(20, 0)
+		}),
+		expectedString: 'limit(20,0)&eqn(field%5F1)',
+		message: 'Single node'
 	}
 ];
 

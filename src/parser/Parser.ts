@@ -40,10 +40,10 @@ import Query              from '../Query';
 import GlobParser         from './valueParsers/GlobParser ';
 import GroupbyNodeParser  from './nodeParsers/GroupbyNodeParser';
 import GroupNodeParser    from './nodeParsers/query/GroupNodeParser';
-import EqnNodeParser      from "./nodeParsers/query/binaryOperator/rql/EqnNodeParser";
-import EqfNodeParser      from "./nodeParsers/query/binaryOperator/rql/EqfNodeParser";
-import EqtNodeParser      from "./nodeParsers/query/binaryOperator/rql/EqtNodeParser ";
-import IeNodeParser       from "./nodeParsers/query/binaryOperator/rql/IeNodeParser";
+import EqnNodeParser      from './nodeParsers/query/binaryOperator/rql/EqnNodeParser';
+import EqfNodeParser      from './nodeParsers/query/binaryOperator/rql/EqfNodeParser';
+import EqtNodeParser      from './nodeParsers/query/binaryOperator/rql/EqtNodeParser ';
+import IeNodeParser       from './nodeParsers/query/binaryOperator/rql/IeNodeParser';
 
 export default class Parser {
 

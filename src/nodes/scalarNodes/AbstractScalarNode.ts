@@ -19,7 +19,7 @@ export default abstract class AbstractScalarNode extends AbstractQueryNode {
 	}
 
 	get value() {
-		return this._value;
+		return this._value === null ? 'null()' : this._value;
 	}
 
 	set value(value) {

@@ -27,4 +27,9 @@ export default class Limit extends AbstractNode {
 	set offset(value: number) {
 		this._offset = value;
 	}
+
+	next() {
+		this._offset += this._limit;
+		return this;
+	}
 }

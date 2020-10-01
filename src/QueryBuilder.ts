@@ -13,7 +13,7 @@ export default class QueryBuilder {
 	protected query: Query;
 
 	constructor() {
-		this.query = new Query({});
+		this.query = new Query();
 	}
 
 	addNode(node: AbstractNode) {
@@ -32,7 +32,7 @@ export default class QueryBuilder {
 		if (node instanceof GroupBy) {
 			return this.addGroupBy(node);
 		}
-		throw new Error(`Unknown node "${node.name}"`, );
+		throw new Error(`Unknown node "${ node.name }"`);
 	}
 
 	getQuery() {
@@ -52,7 +52,7 @@ export default class QueryBuilder {
 			if (current instanceof AbstractLogicalNode) {
 				current.addNode(query);
 			} else {
-				this.query.queryNode = new And([current, query]);
+				this.query.queryNode = new And([ current, query ]);
 			}
 		}
 		return this;
@@ -70,6 +70,60 @@ export default class QueryBuilder {
 
 	addGroupBy(node: GroupBy) {
 		this.query.groupNode = node;
+		return this;
+	}
+
+	from(node: AbstractNode) {
+		if (node instanceof Select) {
+			return this.fromSelect(node);
+		}
+		if (node instanceof AbstractQueryNode) {
+			return this.fromQuery(node);
+		}
+		if (node instanceof Sort) {
+			return this.fromSort(node);
+		}
+		if (node instanceof Limit) {
+			return this.fromLimit(node);
+		}
+		if (node instanceof GroupBy) {
+			return this.fromGroupBy(node);
+		}
+		throw new Error(`Unknown node "${ node.name }"`);
+	}
+
+	fromSelect(select: Select) {
+		this.query = new Query({
+			select
+		});
+		return this;
+	}
+
+	fromLimit(limit: Limit) {
+		this.query = new Query({
+			limit
+		});
+		return this;
+	}
+
+	fromQuery(query: AbstractQueryNode) {
+		this.query = new Query({
+			query
+		});
+		return this;
+	}
+
+	fromGroupBy(qroupBy: GroupBy) {
+		this.query = new Query({
+			group: qroupBy
+		});
+		return this;
+	}
+
+	fromSort(sort: Sort) {
+		this.query = new Query({
+			sort
+		});
 		return this;
 	}
 }

@@ -22,17 +22,6 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Cache node_modules
-      uses: actions/cache@master
-      id:
-        cache-node-modules
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-cache-node-modules-${{ hashFiles('**/package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-cache-node-modules-${{ hashFiles('**/package.json') }}
-
-
     # Runs a single command using the runners shell
     - name: Build
       run: npm install

@@ -32,7 +32,7 @@ export default class Query {
 		this._queryNode = q;
 		return this;
 	}
-	
+
 	setSelect(s: Select) {
 		this._selectNode = s;
 		return this;

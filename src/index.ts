@@ -57,3 +57,4 @@ export { default as AbstractNode } from './nodes/AbstractNode';
 export { default as AbstractQueryNode } from './nodes/AbstractQueryNode';
 export { default as AbstractScalarNode } from './nodes/scalarNodes/AbstractScalarNode';
 export { default as AbstractArrayNode } from './nodes/arrayNodes/AbstractArrayNode';
+export { default as AbstractLogicalNode } from './nodes/logicalNodes/AbstractLogicalNode';

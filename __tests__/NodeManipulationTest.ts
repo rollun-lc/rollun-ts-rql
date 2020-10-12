@@ -1,7 +1,4 @@
-import In        from '../dist/nodes/arrayNodes/In';
-import Or        from '../dist/nodes/logicalNodes/Or';
-import Eq               from '../dist/nodes/scalarNodes/Eq';
-import Query, { Limit } from '../dist';
+import {Query, Limit , In, Or, Eq} from '../dist';
 
 describe('Node Manipulation Test', () => {
 	describe('Logical nodes', () => {

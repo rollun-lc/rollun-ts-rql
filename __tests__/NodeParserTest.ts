@@ -1,26 +1,31 @@
-import Lexer                 from '../dist/parser/Lexer';
-import Parser                from '../dist/parser/Parser';
-import * as lodash           from 'lodash';
-import Query                 from '../dist/Query';
-import QueryBuilder          from '../dist/QueryBuilder';
-import Eq                    from '../dist/nodes/scalarNodes/Eq';
-import Ne                    from '../dist/nodes/scalarNodes/Ne';
-import Lt                    from '../dist/nodes/scalarNodes/Lt';
-import Gt                    from '../dist/nodes/scalarNodes/Gt';
-import Le                    from '../dist/nodes/scalarNodes/Le';
-import Ge                    from '../dist/nodes/scalarNodes/Ge';
-import Like                  from '../dist/nodes/scalarNodes/Like';
-import Glob                  from '../dist/parser/Glob';
-import In                    from '../dist/nodes/arrayNodes/In';
-import Out                   from '../dist/nodes/arrayNodes/Out';
-import And                   from '../dist/nodes/logicalNodes/And';
-import Sort                  from '../dist/nodes/Sort';
-import Select                from '../dist/nodes/Select';
-import Limit                 from '../dist/nodes/Limit';
-import Or                    from '../dist/nodes/logicalNodes/Or';
-import Not                   from '../dist/nodes/logicalNodes/Not';
-import GroupBy               from '../dist/nodes/GroupBy';
-import { Eqf, Eqn, Eqt, Ie } from "../dist";
+import Lexer from '../dist/parser/Lexer';
+import Parser from '../dist/parser/Parser';
+import * as lodash from 'lodash';
+import Glob from '../dist/parser/Glob';
+import {
+	Eqf,
+	Eqn,
+	Eqt,
+	Ie,
+	Query,
+	QueryBuilder,
+	Eq,
+	Ne,
+	Lt,
+	Gt,
+	Le,
+	Ge,
+	Like,
+	In,
+	Out,
+	And,
+	Sort,
+	Select,
+	Limit,
+	Or,
+	Not,
+	GroupBy
+} from "../dist";
 
 function encodeString(value: string) {
 	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/, 'g'), (value: string) => {

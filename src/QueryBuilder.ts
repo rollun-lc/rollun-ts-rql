@@ -1,12 +1,13 @@
-import AbstractNode        from './nodes/AbstractNode';
-import AbstractQueryNode   from './nodes/AbstractQueryNode';
-import Query               from './Query';
-import Limit               from './nodes/Limit';
-import Sort                from './nodes/Sort';
-import Select              from './nodes/Select';
-import And                 from './nodes/logicalNodes/And';
+import AbstractNode from './nodes/AbstractNode';
+import AbstractQueryNode from './nodes/AbstractQueryNode';
+import Query from './Query';
+import Limit from './nodes/Limit';
+import Sort from './nodes/Sort';
+import Select from './nodes/Select';
+import And from './nodes/logicalNodes/And';
 import AbstractLogicalNode from './nodes/logicalNodes/AbstractLogicalNode';
-import GroupBy             from './nodes/GroupBy';
+import GroupBy from './nodes/GroupBy';
+import _ from "lodash";
 
 export default class QueryBuilder {
 
@@ -32,7 +33,7 @@ export default class QueryBuilder {
 		if (node instanceof GroupBy) {
 			return this.addGroupBy(node);
 		}
-		throw new Error(`Unknown node "${ node.name }"`);
+		throw new Error(`Unknown node "${node.name}"`);
 	}
 
 	getQuery() {
@@ -52,7 +53,7 @@ export default class QueryBuilder {
 			if (current instanceof AbstractLogicalNode) {
 				current.addNode(query);
 			} else {
-				this.query.queryNode = new And([ current, query ]);
+				this.query.queryNode = new And([current, query]);
 			}
 		}
 		return this;
@@ -73,7 +74,15 @@ export default class QueryBuilder {
 		return this;
 	}
 
-	from(node: AbstractNode) {
+	static create() {
+		return new QueryBuilder();
+	}
+
+	from(node: AbstractNode | Query) {
+		if (node instanceof Query) {
+			this.query = _.cloneDeep(node);
+			return this;
+		}
 		if (node instanceof Select) {
 			return this.fromSelect(node);
 		}
@@ -89,7 +98,7 @@ export default class QueryBuilder {
 		if (node instanceof GroupBy) {
 			return this.fromGroupBy(node);
 		}
-		throw new Error(`Unknown node "${ node.name }"`);
+		throw new Error(`Unknown node "${node instanceof AbstractNode ? node.name : ''}"`);
 	}
 
 	fromSelect(select: Select) {

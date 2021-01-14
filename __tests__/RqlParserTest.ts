@@ -22,6 +22,14 @@ import AggregateSelect       from '../dist/nodes/aggregateNodes/AggregateSelect'
 
 
 describe('RQL Parser Test', () => {
+	test('* wildcard test', () => {
+		const rql = new RqlParser().parse('limit(20,0)&alike(description,string:R*)');
+
+		expect(rql).toEqual(new Query({
+			limit: new Limit(20, 0),
+			query: new AlikeGlob('description', 'R*')
+		}))
+	});
 	test('Group node that contains group nodes', () => {
 		const rqlString = 'and(and(ne(a,3),ne(a,8)),or(ne(b,3),ne(b,8)))';
 		const expectedQueryObject = new Query(

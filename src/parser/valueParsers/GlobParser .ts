@@ -12,6 +12,7 @@ export default class GlobParser implements SubParserInterface {
 		TokenTypeNameMap.T_FLOAT,
 		TokenTypeNameMap.T_STRING,
 		TokenTypeNameMap.T_DATE,
+		TokenTypeNameMap.T_GLOB,
 	];
 
 	/**

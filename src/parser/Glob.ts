@@ -8,7 +8,10 @@ export default class Glob {
 	}
 
 	static encode(value: string): string {
-		return locutus.php.strings.addcslashes(value, '\\?*');
+		// disable encoding of wildcard for now, because it disables usage of wildcard
+		// need to figure out if something will break.
+		// return locutus.php.strings.addcslashes(value, '\\?*');
+		return value;
 	}
 
 	toString() {

@@ -1,5 +1,5 @@
-import { TokenTypeNameMap } from '../dist/parser/Token';
-import Lexer                from '../dist/parser/Lexer';
+import { TokenTypeNameMap } from '../src/parser/Token';
+import Lexer                from '../src/parser/Lexer';
 
 function encodeString(value: string) {
 	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/, 'g'), (value: string) => {

@@ -1,4 +1,4 @@
-import {Query, Limit, In, Or, Eq, QueryBuilder} from '../dist';
+import {Query, Limit, In, Or, Eq, QueryBuilder} from '../src';
 
 describe('Node Manipulation Test', () => {
 	describe('Logical nodes', () => {

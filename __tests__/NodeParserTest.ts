@@ -1,31 +1,31 @@
-import Lexer from '../dist/parser/Lexer';
-import Parser from '../dist/parser/Parser';
-import * as lodash from 'lodash';
-import Glob from '../dist/parser/Glob';
+import Lexer        from '../src/parser/Lexer';
+import Parser       from '../src/parser/Parser';
+import * as lodash  from 'lodash';
+import Glob         from '../src/parser/Glob';
+import QueryBuilder from '../src/QueryBuilder';
 import {
+	And,
+	Eq,
 	Eqf,
 	Eqn,
 	Eqt,
-	Ie,
-	Query,
-	QueryBuilder,
-	Eq,
-	Ne,
-	Lt,
-	Gt,
-	Le,
 	Ge,
-	Like,
+	GroupBy,
+	Gt,
+	Ie,
 	In,
-	Out,
-	And,
-	Sort,
-	Select,
+	Le,
+	Like,
 	Limit,
-	Or,
+	Lt,
+	Ne,
 	Not,
-	GroupBy
-} from "../dist";
+	Or,
+	Out,
+	Query,
+	Select,
+	Sort
+}                   from '../src';
 
 function encodeString(value: string) {
 	return encodeURIComponent(value).replace(new RegExp(/[-_.~'()*]/, 'g'), (value: string) => {
@@ -43,15 +43,15 @@ function encodeString(value: string) {
 }
 
 function testParsing(rql: string, expected: Query, testNumber: number) {
-	const lexer = new Lexer();
-	const parser = new Parser();
+	const lexer         = new Lexer();
+	const parser        = new Parser();
 	const parsingResult = parser.parse(lexer.tokenize(rql));
 	expect(lodash.isEqual(parsingResult, expected)).toBeTruthy();
 }
 
 function testSyntaxError(rql: string, errorMessage: string) {
 	try {
-		const lexer = new Lexer();
+		const lexer  = new Lexer();
 		const parser = new Parser();
 		parser.parse(lexer.tokenize(rql));
 	} catch (error) {
@@ -59,13 +59,12 @@ function testSyntaxError(rql: string, errorMessage: string) {
 	}
 }
 
-// @ts-ignore
 const dataForParsingTest = {
 	'simple eq': [
 		'eq(name,value)',
-		(new QueryBuilder())
-			.addQuery(new Eq('name', 'value'))
-			.getQuery(),
+		new QueryBuilder()
+			.from(new Eq('name', 'value'))
+			.getQuery()
 	],
 	'scalar operators': [
 		'eq(a,1)&ne(b,2)&lt(c,3)&gt(d,4)&le(e,5)&ge(f,6)&like(g,*abc?)',
@@ -77,21 +76,21 @@ const dataForParsingTest = {
 			.addQuery(new Le('e', 5))
 			.addQuery(new Ge('f', 6))
 			.addQuery(new Like('g', new Glob('*abc?')))
-			.getQuery(),
+			.getQuery()
 	],
 	'array operators': [
 		'in(a,(1,b))&out(c,(2,d))',
 		(new QueryBuilder())
-			.addQuery(new In('a', [1, 'b']))
-			.addQuery(new Out('c', [2, 'd']))
-			.getQuery(),
+			.addQuery(new In('a', [ 1, 'b' ]))
+			.addQuery(new Out('c', [ 2, 'd' ]))
+			.getQuery()
 	],
 	'multiple query operators': [
 		'eq(a,b)&lt(c,d)',
 		(new QueryBuilder())
 			.addQuery(new Eq('a', 'b'))
 			.addQuery(new Lt('c', 'd'))
-			.getQuery(),
+			.getQuery()
 	],
 	'logic operators': [
 		'and(eq(a,b),lt(c,d),or(in(a,(1,f)),gt(g,2)))&not(ne(h,3))',
@@ -100,25 +99,25 @@ const dataForParsingTest = {
 				new Eq('a', 'b'),
 				new Lt('c', 'd'),
 				new Or([
-					new In('a', [1, 'f']),
-					new Gt('g', 2),
+					new In('a', [ 1, 'f' ]),
+					new Gt('g', 2)
 				])
 			]))
 			.addQuery(new Not([
-				new Ne('h', 3),
+				new Ne('h', 3)
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'select, sort and limit operators': [
 		'select(a,b,c)&sort(+a,-b)&limit(1,2)',
 		(new QueryBuilder())
-			.addSelect(new Select(['a', 'b', 'c']))
+			.addSelect(new Select([ 'a', 'b', 'c' ]))
 			.addSort(new Sort({
 				'a': 1,
-				'b': -1,
+				'b': -1
 			}))
 			.addLimit(new Limit(1, 2))
-			.getQuery(),
+			.getQuery()
 	],
 	'string typecast': [
 		'ne(x,string:*)&' +
@@ -132,13 +131,13 @@ const dataForParsingTest = {
 				'true',
 				'false',
 				'null',
-				'',
+				''
 			]))
 			.addQuery(new Out('c', [
 				'-1',
 				'+.5e10'
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'integer typecast': [
 		'eq(a,integer:0)&' +
@@ -158,7 +157,7 @@ const dataForParsingTest = {
 			.addQuery(new Eq('f', 0))
 			.addQuery(new Eq('g', 0))
 			.addQuery(new Eq('h', 20160701094855))
-			.getQuery(),
+			.getQuery()
 	],
 	'float typecast': [
 		'eq(a,float:0)&' +
@@ -178,7 +177,7 @@ const dataForParsingTest = {
 			.addQuery(new Eq('f', 0.))
 			.addQuery(new Eq('g', 0.))
 			.addQuery(new Eq('h', 20160701094855.))
-			.getQuery(),
+			.getQuery()
 	],
 	'boolean typecast': [
 		'eq(a,boolean:0)&' +
@@ -198,7 +197,7 @@ const dataForParsingTest = {
 			.addQuery(new Eq('f', false))
 			.addQuery(new Eq('g', false))
 			.addQuery(new Eq('h', true))
-			.getQuery(),
+			.getQuery()
 	],
 	'glob typecast': [
 		'like(a,glob:0)&' +
@@ -210,7 +209,7 @@ const dataForParsingTest = {
 			.addQuery(new Like('b', new Glob('1.5')))
 			.addQuery(new Like('c', new Glob('a')))
 			.addQuery(new Like('d', new Glob('2016-07-01T09:48:55Z')))
-			.getQuery(),
+			.getQuery()
 	],
 	'constants': [
 		'in(a,(null(),true(),false(),empty()))',
@@ -219,9 +218,9 @@ const dataForParsingTest = {
 				null,
 				true,
 				false,
-				'',
+				''
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'fiql operators': [
 		'a=eq=1&b=ne=2&c=lt=3&d=gt=4&e=le=5&f=ge=6&g=in=(7,8)&h=out=(9,10)&i=like=*abc?',
@@ -232,10 +231,10 @@ const dataForParsingTest = {
 			.addQuery(new Gt('d', 4))
 			.addQuery(new Le('e', 5))
 			.addQuery(new Ge('f', 6))
-			.addQuery(new In('g', [7, 8]))
-			.addQuery(new Out('h', [9, 10]))
+			.addQuery(new In('g', [ 7, 8 ]))
+			.addQuery(new Out('h', [ 9, 10 ]))
 			.addQuery(new Like('i', new Glob('*abc?')))
-			.getQuery(),
+			.getQuery()
 	],
 	'fiql operators (json compatible)': [
 		'a=1&b==2&c<>3&d!=4&e<5&f>6&g<=7&h>=8',
@@ -248,26 +247,26 @@ const dataForParsingTest = {
 			.addQuery(new Gt('f', 6))
 			.addQuery(new Le('g', 7))
 			.addQuery(new Ge('h', 8))
-			.getQuery(),
+			.getQuery()
 	],
 	'group with one operator': [
 		'(eq(a,b))',
 		(new QueryBuilder())
 			.addQuery(new Eq('a', 'b'))
-			.getQuery(),
+			.getQuery()
 	],
 	'simple groups': [
 		'(eq(a,b)&lt(c,d))&(ne(e,f)|gt(g,h))',
 		(new QueryBuilder())
 			.addQuery(new And([
 				new Eq('a', 'b'),
-				new Lt('c', 'd'),
+				new Lt('c', 'd')
 			]))
 			.addQuery(new Or([
 				new Ne('e', 'f'),
-				new Gt('g', 'h'),
+				new Gt('g', 'h')
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'deep groups & mix groups with operators': [
 		'(eq(a,b)|lt(c,d)|and(gt(e,f),(ne(g,h)|ge(i,j)|in(k,(l,m,n))|(o<>p&q=le=r))))',
@@ -280,27 +279,27 @@ const dataForParsingTest = {
 					new Or([
 						new Ne('g', 'h'),
 						new Ge('i', 'j'),
-						new In('k', ['l', 'm', 'n']),
+						new In('k', [ 'l', 'm', 'n' ]),
 						new And([
 							new Ne('o', 'p'),
-							new Le('q', 'r'),
-						]),
-					]),
-				]),
+							new Le('q', 'r')
+						])
+					])
+				])
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'datetime support': [
 		'in(a,(2015-04-16T17:40:32Z,2012-02-29T17:40:32Z))',
 		(new QueryBuilder())
 			.addQuery(new In('a', [
 				new Date('2015-04-16T17:40:32Z'),
-				new Date('2012-02-29T17:40:32Z'),
+				new Date('2012-02-29T17:40:32Z')
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'string encoding': [
-		`in(a,(${encodeString('+a-b:c')},null(),${encodeString('null()')},2015-04-19T21:00:00Z,${encodeString('2015-04-19T21:00:00Z')},1.1e+3,${encodeString('1.1e+3')}))&like(b,${'*abc?'})&eq(c,${encodeString('*abc?')})`,
+		`in(a,(${ encodeString('+a-b:c') },null(),${ encodeString('null()') },2015-04-19T21:00:00Z,${ encodeString('2015-04-19T21:00:00Z') },1.1e+3,${ encodeString('1.1e+3') }))&like(b,${ '*abc?' })&eq(c,${ encodeString('*abc?') })`,
 		(new QueryBuilder())
 			.addQuery(new In('a', [
 				'+a-b:c',
@@ -309,11 +308,11 @@ const dataForParsingTest = {
 				new Date('2015-04-19T21:00:00Z'),
 				'2015-04-19T21:00:00Z',
 				1.1e+3,
-				'1.1e+3',
+				'1.1e+3'
 			]))
 			.addQuery(new Like('b', new Glob('*abc?')))
 			.addQuery(new Eq('c', '*abc?'))
-			.getQuery(),
+			.getQuery()
 	],
 	'long integers': [
 		`in(a,(9223372036854775806,-9223372036854775807,9223372036854775807,-9223372036854775808,9223372036854775808,-9223372036854775809,9223372036854775809,-9223372036854775810))`,
@@ -327,14 +326,14 @@ const dataForParsingTest = {
 				9223372036854775808,
 				-9223372036854775809,
 				9223372036854775809,
-				-9223372036854775810,
+				-9223372036854775810
 			]))
-			.getQuery(),
+			.getQuery()
 	],
 	'groupBy Node': [
 		'groupby(id,age)',
 		(new QueryBuilder())
-			.addGroupBy(new GroupBy(['id', 'age']))
+			.addGroupBy(new GroupBy([ 'id', 'age' ]))
 			.getQuery()
 	],
 	'Binary nodes': [
@@ -352,8 +351,8 @@ const dataForParsingTest = {
 describe('Parser Test', () => {
 	const testQty = Object.keys(dataForParsingTest).length;
 	Object.values(dataForParsingTest).forEach((testData: any[], index) => {
-			test(`Parsing test ${index + 1} of ${testQty}`, () => {
-					const [rql, result] = testData;
+			test(`Parsing test ${ index + 1 } of ${ testQty }`, () => {
+					const [ rql, result ] = testData;
 					testParsing(rql, result, index + 1);
 				}
 			);

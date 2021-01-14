@@ -1,10 +1,10 @@
-import QueryStringifier from '../dist/QueryStringifier';
-import Query            from '../dist/Query';
-import Select           from '../dist/nodes/Select';
-import Limit            from '../dist/nodes/Limit';
-import Eq               from '../dist/nodes/scalarNodes/Eq';
-import Sort             from '../dist/nodes/Sort';
-import RqlParser        from '../dist/RqlParser';
+import QueryStringifier from '../src/QueryStringifier';
+import Query            from '../src/Query';
+import Select           from '../src/nodes/Select';
+import Limit            from '../src/nodes/Limit';
+import Eq               from '../src/nodes/scalarNodes/Eq';
+import Sort             from '../src/nodes/Sort';
+import RqlParser        from '../src/RqlParser';
 
 
 describe('Speed test', () => {

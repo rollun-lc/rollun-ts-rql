@@ -1,24 +1,24 @@
-import QueryStringifier      from '../dist/QueryStringifier';
-import Query                 from '../dist/Query';
-import Select                from '../dist/nodes/Select';
-import Sort                  from '../dist/nodes/Sort';
-import Limit                 from '../dist/nodes/Limit';
-import In                    from '../dist/nodes/arrayNodes/In';
-import Out                   from '../dist/nodes/arrayNodes/Out';
-import And                   from '../dist/nodes/logicalNodes/And';
-import Or                    from '../dist/nodes/logicalNodes/Or';
-import Not                   from '../dist/nodes/logicalNodes/Not';
-import Alike                 from '../dist/nodes/scalarNodes/Alike';
-import Eq                    from '../dist/nodes/scalarNodes/Eq';
-import Ge                    from '../dist/nodes/scalarNodes/Ge';
-import Gt                    from '../dist/nodes/scalarNodes/Gt';
-import Le                    from '../dist/nodes/scalarNodes/Le';
-import Like                  from '../dist/nodes/scalarNodes/Like';
-import Lt                    from '../dist/nodes/scalarNodes/Lt';
-import Ne                    from '../dist/nodes/scalarNodes/Ne';
-import GroupBy               from '../dist/nodes/GroupBy';
-import AggregateFunctionNode from '../dist/nodes/aggregateNodes/AggregateFunctionNode';
-import { Eqf, Eqn, Eqt, Ie } from '../dist';
+import QueryStringifier      from '../src/QueryStringifier';
+import Query                 from '../src/Query';
+import Select                from '../src/nodes/Select';
+import Sort                  from '../src/nodes/Sort';
+import Limit                 from '../src/nodes/Limit';
+import In                    from '../src/nodes/arrayNodes/In';
+import Out                   from '../src/nodes/arrayNodes/Out';
+import And                   from '../src/nodes/logicalNodes/And';
+import Or                    from '../src/nodes/logicalNodes/Or';
+import Not                   from '../src/nodes/logicalNodes/Not';
+import Alike                 from '../src/nodes/scalarNodes/Alike';
+import Eq                    from '../src/nodes/scalarNodes/Eq';
+import Ge                    from '../src/nodes/scalarNodes/Ge';
+import Gt                    from '../src/nodes/scalarNodes/Gt';
+import Le                    from '../src/nodes/scalarNodes/Le';
+import Like                  from '../src/nodes/scalarNodes/Like';
+import Lt                    from '../src/nodes/scalarNodes/Lt';
+import Ne                    from '../src/nodes/scalarNodes/Ne';
+import GroupBy               from '../src/nodes/GroupBy';
+import AggregateFunctionNode from '../src/nodes/aggregateNodes/AggregateFunctionNode';
+import { Eqf, Eqn, Eqt, Ie } from '../src';
 
 const dataProvider = [
   {

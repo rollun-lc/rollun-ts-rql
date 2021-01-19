@@ -1,3 +1,8 @@
+![Coverage badge](https://img.shields.io/badge/Coverage%20Statements-12.9%25-red.svg)
+![Coverage badge](https://img.shields.io/badge/Coverage%20Lines-13.42%25-red.svg)
+![Coverage badge](https://img.shields.io/badge/Coverage%20Functions-10.6%25-red.svg)
+![Coverage badge](https://img.shields.io/badge/Coverage%20Branches-11.08%25-red.svg)
+
 # rollun-ts-rql
 RQL library written in Typescript.
 This library contains:

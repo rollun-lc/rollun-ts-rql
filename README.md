@@ -11,23 +11,19 @@ This library contains:
 ## Installation
 preferred way to install this library is via npm.
 Run
+
 ```
 npm install rollun-ts-rql
 ```
 
-or add
-```
-"rollun-ts-rql": "*",
-```
-to the dependencies section of your package.json
 ## Basic usage
 ```typescript
-import QueryStringifier from 'rollun-ts-rql/dist';
-import Query from 'rollun-ts-rql/dist';
-import Select from 'rollun-ts-rql/dist';
-import And from 'rollun-ts-rql/dist';
-import Eq from 'rollun-ts-rql/dist';
-import Ge from 'rollun-ts-rql/dist';
+import { QueryStringifier } from 'rollun-ts-rql';
+import { Query } from 'rollun-ts-rql';
+import { Select } from 'rollun-ts-rql';
+import { And } from 'rollun-ts-rql';
+import { Eq } from 'rollun-ts-rql';
+import { Ge } from 'rollun-ts-rql';
 
 const query = new Query({
     select: new Select(['id', 'name', 'age', 'city']),
@@ -65,6 +61,8 @@ Logic operators
 QueryStringifier exposes static method `stringify`, that takes a node
 and returns a string representation of that node
 ```typescript
+import { QueryStringifier } from 'rollun-ts-rql';
+
 const rqlString = QueryStringifier.stringify(
     new Query({
         query: new And([
@@ -75,4 +73,16 @@ const rqlString = QueryStringifier.stringify(
 );
 console.log(rqlString);
 //output: and(eq(status,active),eq(age,33))
+```
+
+## Contributing
+
+Before contributing to this lib, make sure you have correct node.js version. It is specified in `.nvmrc` file
+
+You can use [NVM](https://github.com/nvm-sh/nvm) to manage node versions.
+
+For example, run following command to automatically use correct node version:
+
+```shell
+nvm use
 ```

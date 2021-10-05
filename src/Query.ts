@@ -5,6 +5,14 @@ import AbstractQueryNode    from './nodes/AbstractQueryNode';
 import GroupBy              from './nodes/GroupBy';
 import { QueryStringifier } from './index';
 
+type QueryProps = {
+	select?: Select,
+	sort?: Sort,
+	limit?: Limit,
+	query?: AbstractQueryNode,
+	group?: GroupBy
+};
+
 export default class Query {
 
 	protected _selectNode;
@@ -13,14 +21,7 @@ export default class Query {
 	protected _queryNode;
 	protected _groupNode;
 
-	constructor(
-		props: {
-			select?: Select,
-			sort?: Sort,
-			limit?: Limit,
-			query?: AbstractQueryNode,
-			group?: GroupBy
-		} = {}) {
+	constructor(props: QueryProps = {}) {
 		this._groupNode  = props.group;
 		this._selectNode = props.select;
 		this._sortNode   = props.sort;

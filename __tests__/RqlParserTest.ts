@@ -93,5 +93,5 @@ describe('RQL Parser Test', () => {
 		'not(alike(description,string:R*))'
 	])('Static parse method `%s`', (rql) => {
 		expect(RqlParser.staticParse(rql)).toEqual(new RqlParser().parse(rql));
-	})
+	});
 });

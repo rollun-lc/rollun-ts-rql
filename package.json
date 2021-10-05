@@ -8,7 +8,8 @@
     "fix-style": "node_modules/.bin/tslint --fix --project ./tslint.json",
     "build": "tsc && babel src --ignore node_modules --out-dir dist --extensions '.ts' --minified",
     "test": "jest",
-    "test:coverage": "jest --coverage --coverageReporters=\"json-summary\"  --watchAll=false",
+    "test:ci": "jest --coverage --coverageReporters=\"json-summary\"  --watchAll=false",
+    "test:coverage": "jest --coverage",
     "update:badge": "node ./updateBadge.js"
   },
   "jest": {

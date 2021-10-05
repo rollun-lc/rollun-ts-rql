@@ -59,6 +59,10 @@ export default class RqlParser {
 
 	}
 
+	static staticParse(rql: string, allowedAggregateFunctions: string[] = ['count', 'max', 'min', 'sum', 'avg']): Query {
+		return (new RqlParser(allowedAggregateFunctions).parse(rql));
+	}
+
 	parse(rql: string): Query {
 		const processedRql = this.prepareRqlString(rql);
 		const parser = this.createParser();

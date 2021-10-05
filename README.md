@@ -74,3 +74,15 @@ const rqlString = QueryStringifier.stringify(
 console.log(rqlString);
 //output: and(eq(status,active),eq(age,33))
 ```
+
+## Contributing
+
+Before contributing to this lib, make sure you have correct node.js version. It is specified in `.nvmrc` file
+
+You can use [NVM](https://github.com/nvm-sh/nvm) to manage node versions.
+
+For example, run following command to automatically use correct node version:
+
+```shell
+nvm use
+```

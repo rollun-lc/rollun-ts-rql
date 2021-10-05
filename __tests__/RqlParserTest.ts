@@ -86,6 +86,12 @@ describe('RQL Parser Test', () => {
 			const parser = new RqlParser();
 			const actualQueryObject = parser.parse(rqlString);
 			expect(lodash.isEqual(actualQueryObject, expectedQueryObject)).toBeTruthy();
-		}
-	);
+		});
+	test.each([
+		'limit(20,0)&alike(description,string:R*)',
+		'and(eq(field,value),alike(description,string:R*))',
+		'not(alike(description,string:R*))'
+	])('Static parse method `%s`', (rql) => {
+		expect(RqlParser.staticParse(rql)).toEqual(new RqlParser().parse(rql));
+	})
 });

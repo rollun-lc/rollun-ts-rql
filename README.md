@@ -34,6 +34,24 @@ const query = new Query({
 });
 const rqlString = QueryStringifier.stringify(query);
 console.log(rqlString);
+
+// using builder pattern
+
+const query = new Query()
+  .addSelect(new Select(['id', 'name', 'age', 'city']))
+  .addQuery(new And([
+	new Eq('name', 'John'),
+	new Ge('age', 18)
+  ]))
+  // {
+	// select: new Select(['id', 'name', 'age', 'city']),
+	// query: new And([
+	// 	new Eq('name', 'John'),
+	// 	new Ge('age', 18)
+	// ])
+// });
+const rqlString = QueryStringifier.stringify(query);
+console.log(rqlString);
 //output: select(id,name,age,city)&and(eq(name,John),ge(age,18))
 ```
 
@@ -56,6 +74,9 @@ Logic operators
 * and - new And(&lt;array of nodes>)
 * or - new Or(&lt;array of nodes>)
 * not - new Not(&lt;array of nodes>)
+
+Aggregate nodes
+* groupby - new GroupBy(&lt;array of values>)
 
 ## Query to string
 QueryStringifier exposes static method `stringify`, that takes a node

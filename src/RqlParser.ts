@@ -64,7 +64,10 @@ export default class RqlParser {
 	}
 
 	parse(rql: string): Query {
-		const processedRql = this.prepareRqlString(rql);
+		const fixedRql = rql
+			.replace('_', '%5F')
+			.replace(' ', '%20');
+		const processedRql = this.prepareRqlString(fixedRql);
 		const parser = this.createParser();
 		const lexer = new Lexer();
 		const tokens = lexer.tokenize(processedRql);

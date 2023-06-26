@@ -64,10 +64,7 @@ export default class RqlParser {
 	}
 
 	parse(rql: string): Query {
-		const fixedRql = rql
-			.replace('_', '%5F')
-			.replace(' ', '%20');
-		const processedRql = this.prepareRqlString(fixedRql);
+		const processedRql = this.prepareRqlString(rql);
 		const parser = this.createParser();
 		const lexer = new Lexer();
 		const tokens = lexer.tokenize(processedRql);
@@ -75,8 +72,11 @@ export default class RqlParser {
 	}
 
 	protected prepareRqlString(rql: string): string {
+		const fixedRql = rql
+			.replace('_', '%5F')
+			.replace(' ', '%20');
 		const sortNodeRegexp = /sort\(([^()&]+)\)/;
-		const matches = rql.match(sortNodeRegexp);
+		const matches = fixedRql.match(sortNodeRegexp);
 		if (matches) {
 			let sortNodeString = 'sort(';
 			const sortFields = matches[1].split(',');
@@ -88,9 +88,9 @@ export default class RqlParser {
 				sortNodeString += finalSortField + ',';
 			});
 			sortNodeString = sortNodeString.slice(0, sortNodeString.length - 1) + ')';
-			return rql.replace(sortNodeRegexp, sortNodeString);
+			return fixedRql.replace(sortNodeRegexp, sortNodeString);
 		}
-		return rql;
+		return fixedRql;
 	}
 
 	protected createParser(): Parser {
